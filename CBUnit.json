@@ -1,0 +1,5 @@
+{
+  "documentation": "https://christopher-bsw.atlassian.net/wiki/spaces/CBUN/overview",
+  "repository": "https://github.com/ChrisBSW/CBUnit.git",
+  "description": "C++11 BDD Style Unit Testing Library"
+}
