@@ -2,48 +2,33 @@
 
 namespace CBUnit
 {
-  void TestMonitor::beginFixture(Fixture* fixture)
+  void TestMonitor::beginFixture(Fixture& fixture)
   {
-    _objectStack.push({fixture, ObjectType::Fixture});
-    (void)fixture;
+    _objectStack.push({&fixture, ObjectType::Fixture});
   }
 
-  void TestMonitor::endFixture(Fixture* fixture)
+  void TestMonitor::endFixture()
   {
-    (void)fixture;
     _objectStack.pop();
   }
 
-  void TestMonitor::beginGroup(Group* group)
+  void TestMonitor::beginGroup(Group& group)
   {
-    _objectStack.push({group, ObjectType::Group});
+    _objectStack.push({&group, ObjectType::Group});
   }
 
-  void TestMonitor::endGroup(Group* group)
+  void TestMonitor::endGroup()
   {
-    (void)group;
     _objectStack.pop();
-    
   }
 
-  void TestMonitor::beginScenario(Scenario* scenario)
+  void TestMonitor::beginScenario(Scenario& scenario)
   {
-    _objectStack.push({scenario, ObjectType::Scenario});
+    _objectStack.push({&scenario, ObjectType::Scenario});
   }
 
-  void TestMonitor::passScenario(Scenario* scenario)
+  void TestMonitor::endScenario()
   {
-      (void)scenario;
-  }
-
-  void TestMonitor::failScenario(Scenario* scenario)
-  {
-      (void)scenario;
-  }
-
-  void TestMonitor::endScenario(Scenario* scenario)
-  {
-      (void)scenario;
       _objectStack.pop();
   }
 

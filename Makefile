@@ -10,7 +10,13 @@ CBUNIT_SOURCE_FILES = 	src/main.cpp \
 												src/Fixture.cpp \
 												src/TestRunner.cpp \
 												src/TestMonitor.cpp \
+												src/Reporters/TestReporter.cpp \
+												src/Reporters/DotTestReporter.cpp \
+												src/Reporters/SpecTestReporter.cpp \
+												src/OutputStreams/OutputStream.cpp \
+												src/OutputStreams/StdCoutOutputStream.cpp \
 												src/TestStructureError.cpp \
+												src/TestStatistics.cpp \
 												src/LineInfo.cpp \
 												src/FileInfo.cpp
 

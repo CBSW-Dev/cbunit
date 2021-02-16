@@ -9,14 +9,12 @@ namespace CBUnit
   class TestMonitor
   {
   public:
-    void beginFixture(Fixture* fixture);
-    void endFixture(Fixture* fixture);
-    void beginGroup(Group* group);
-    void endGroup(Group* group);
-    void beginScenario(Scenario* scenario);
-    void passScenario(Scenario* scenario);
-    void failScenario(Scenario* scenario);
-    void endScenario(Scenario* scenario);
+    void beginFixture(Fixture& fixture);
+    void endFixture();
+    void beginGroup(Group& group);
+    void endGroup();
+    void beginScenario(Scenario& scenario);
+    void endScenario();
 
     enum class ObjectType
     {

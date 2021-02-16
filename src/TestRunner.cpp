@@ -6,6 +6,7 @@ namespace CBUnit
   TestRunner* TestRunner::_instance = nullptr;
 
   TestRunner::TestRunner():
+    _reporter(_ostream),
     _deferredTestStructureError("", "", 0)
   {}
 
@@ -36,15 +37,18 @@ namespace CBUnit
     {
     case TestMonitor::ObjectType::Fixture:
     case TestMonitor::ObjectType::Group:
-      _testMonitor.beginGroup(group);
+      _testMonitor.beginGroup(*group);
+      _reporter.beginGroup(*group);
       group->run();
-      _testMonitor.endGroup(group);
+      _reporter.endGroup(*group);
+      _testMonitor.endGroup();
+      delete group;
       break;
     case TestMonitor::ObjectType::None:
       _deferredTestStructureError = TestStructureError("Group cannot be added to the global scope", group->filename(), group->lineNumber());
       break;
     case TestMonitor::ObjectType::Scenario:
-      throw TestStructureError("Scenario cannot be added within a scenario", group->filename(), group->lineNumber());
+      throw TestStructureError("Group cannot be added within a scenario", group->filename(), group->lineNumber());
       break;
     }
   }
@@ -56,10 +60,13 @@ namespace CBUnit
     {
     case TestMonitor::ObjectType::Fixture:
     case TestMonitor::ObjectType::Group:
-      _testMonitor.beginScenario(scenario);
+      _testMonitor.beginScenario(*scenario);
+      _reporter.beginScenario(*scenario);
       scenario->run();
-      _testMonitor.passScenario(scenario);
-      _testMonitor.endScenario(scenario);
+      _reporter.passScenario(*scenario);
+      _statistics.passTest();
+      _testMonitor.endScenario();
+      delete scenario;
       break;
     case TestMonitor::ObjectType::None:
       _deferredTestStructureError = TestStructureError("Scenario cannot be added to the global scope", scenario->filename(), scenario->lineNumber());
@@ -72,6 +79,8 @@ namespace CBUnit
 
   int TestRunner::run()
   {
+    _reporter.begin();
+    _statistics.begin();
     if (_deferredTestStructureError.message() != "")
     {
       throw _deferredTestStructureError;
@@ -80,11 +89,15 @@ namespace CBUnit
     
     for (FixtureListIterator it = std::make_move_iterator(_fixtures.begin()), end = std::make_move_iterator(_fixtures.end()); it != end; ++it)
     {
-      _testMonitor.beginFixture(*it);
+      Fixture* fixture = *it;
+      _testMonitor.beginFixture(*fixture);
+      _reporter.beginFixture(*fixture);
       (*it)->run();
-      _testMonitor.endFixture(*it);
-
+      _reporter.endFixture(*fixture);
+      _testMonitor.endFixture();
     }
+    _statistics.end();
+    _reporter.end(_statistics);
     return 0;
   }
 

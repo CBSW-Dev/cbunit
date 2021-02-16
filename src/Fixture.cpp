@@ -13,7 +13,6 @@ namespace CBUnit
 
   void Fixture::run()
   {
-    std::cout << "Running Fixture: " << _name << std::endl;
     _function();
   }
 

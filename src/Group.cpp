@@ -13,8 +13,6 @@ namespace CBUnit
 
   void Group::run()
   {
-    std::cout << "Running Group: " << _name << std::endl;
-
     _function();
   }
 

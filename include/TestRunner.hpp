@@ -5,6 +5,9 @@
 #include "Group.hpp"
 #include "Scenario.hpp"
 #include "TestMonitor.hpp"
+#include "OutputStreams/StdCoutOutputStream.hpp"
+#include "Reporters/DotTestReporter.hpp"
+#include "Reporters/SpecTestReporter.hpp"
 #include "TestStructureError.hpp"
 
 namespace CBUnit
@@ -27,6 +30,10 @@ namespace CBUnit
 
     Fixture* _currentFixture = nullptr;
     TestMonitor _testMonitor;
+    StdCoutOutputStream _ostream;
+    //DotTestReporter _reporter;
+    SpecTestReporter _reporter;
+    TestStatistics _statistics;
     TestStructureError _deferredTestStructureError;
 
     static TestRunner* _instance;

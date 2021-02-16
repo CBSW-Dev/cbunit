@@ -13,8 +13,6 @@ namespace CBUnit
 
   void Scenario::run()
   {
-    std::cout << "Running Scenario: " << _name << std::endl;
-
     _function();
   }
 
