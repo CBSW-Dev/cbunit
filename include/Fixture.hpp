@@ -13,7 +13,7 @@ namespace CBUnit
     friend class FixtureDeclaration;
     friend class TestRunner;
   private:
-    Fixture(const char* name, RunFunction function, const char* filename, uint32_t lineNumber);
+    Fixture(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber);
 
     void run();
   private:
@@ -33,5 +33,6 @@ namespace CBUnit
   {
   public:
     FixtureDeclaration(const char* name, RunFunction function);
+    FixtureDeclaration(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function);
   };
 }

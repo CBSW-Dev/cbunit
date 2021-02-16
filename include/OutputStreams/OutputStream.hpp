@@ -18,6 +18,7 @@ namespace CBUnit
       Default,
       White,
       Grey,
+      DarkGrey,
       Red,
       Green,
       Yellow,
@@ -29,6 +30,7 @@ namespace CBUnit
     static constexpr Colours reset = Colours::Default;
     static constexpr Colours white = Colours::White;
     static constexpr Colours grey = Colours::Grey;
+    static constexpr Colours darkGrey = Colours::DarkGrey;
     static constexpr Colours red = Colours::Red;
     static constexpr Colours green = Colours::Green;
     static constexpr Colours yellow = Colours::Yellow;

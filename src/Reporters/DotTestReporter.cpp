@@ -26,6 +26,12 @@ namespace CBUnit
     _ostream << _ostream.green << "."  << _ostream.reset;
   }
 
+
+  void DotTestReporter::skipScenario(Scenario& scenario) 
+  {
+    _ostream << _ostream.grey << "."  << _ostream.reset;
+  }
+
   void DotTestReporter::failScenario(Scenario& scenario, const TestError& error) 
   {
     _ostream << _ostream.red << "."  << _ostream.reset;

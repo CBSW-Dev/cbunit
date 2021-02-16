@@ -7,8 +7,8 @@
 
 namespace CBUnit
 {
-  Fixture::Fixture(const char* name, RunFunction function, const char* filename, uint32_t lineNumber):
-    TestObject(name, function, filename, lineNumber)
+  Fixture::Fixture(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber):
+    TestObject(name, attributes, function, filename, lineNumber)
   {}
 
   void Fixture::run()
@@ -18,6 +18,11 @@ namespace CBUnit
 
   FixtureDeclaration::FixtureDeclaration(const char* name, RunFunction function)
   {
-    TestRunner::instance().addFixture(new Fixture(name, function, FileInfo::file, LineInfo::line));
+    TestRunner::instance().addFixture(new Fixture(name, {}, function, FileInfo::file, LineInfo::line));
+  }
+
+  FixtureDeclaration::FixtureDeclaration(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function)
+  {
+    TestRunner::instance().addFixture(new Fixture(name, attributes, function, FileInfo::file, LineInfo::line));
   }
 }

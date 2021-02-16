@@ -7,8 +7,8 @@
 
 namespace CBUnit
 {
-  Scenario::Scenario(const char* name, RunFunction function, const char* filename, uint32_t lineNumber):
-    TestObject(name, function, filename, lineNumber)
+  Scenario::Scenario(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber):
+    TestObject(name, attributes, function, filename, lineNumber)
   {}
 
   void Scenario::run()
@@ -18,6 +18,11 @@ namespace CBUnit
 
   ScenarioDeclaration::ScenarioDeclaration(const char* name, RunFunction function)
   {
-    TestRunner::instance().addScenario(new Scenario(name, function, FileInfo::file, LineInfo::line));
+    TestRunner::instance().addScenario(new Scenario(name, {}, function, FileInfo::file, LineInfo::line));
+  }
+
+  ScenarioDeclaration::ScenarioDeclaration(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function)
+  {
+    TestRunner::instance().addScenario(new Scenario(name, attributes, function, FileInfo::file, LineInfo::line));
   }
 }

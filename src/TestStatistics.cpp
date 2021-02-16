@@ -12,14 +12,17 @@ namespace CBUnit
     
   void TestStatistics::end()
   {
-    _endTime = std::chrono::steady_clock::now();
-    
+    _endTime = std::chrono::steady_clock::now(); 
   }
-
 
   void TestStatistics::passTest()
   {
     ++_passes;
+  }
+
+  void TestStatistics::skipTest()
+  {
+    ++_skips;
   }
 
   void TestStatistics::failTest(const std::string& scenario, const TestError& error)
@@ -32,9 +35,19 @@ namespace CBUnit
     return _failures;
   }
 
-  uint32_t TestStatistics::testCount() const
+  uint32_t TestStatistics::skipCount() const
   {
-    return _passes + _failures.size();
+    return _skips;
+  }
+
+  uint32_t TestStatistics::passCount() const
+  {
+    return _passes;
+  }
+
+  uint32_t TestStatistics::failureCount() const
+  {
+    return _failures.size();
   }
     
   uint32_t TestStatistics::millisecondsElapsed() const

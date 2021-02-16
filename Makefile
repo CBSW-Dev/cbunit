@@ -15,6 +15,9 @@ CBUNIT_SOURCE_FILES = 	src/main.cpp \
 												src/Reporters/SpecTestReporter.cpp \
 												src/OutputStreams/OutputStream.cpp \
 												src/OutputStreams/StdCoutOutputStream.cpp \
+												src/OutputStreams/ANSI8OutputStream.cpp \
+												src/OutputStreams/ANSI16OutputStream.cpp \
+												src/OutputStreams/ANSI256OutputStream.cpp \
 												src/TestError.cpp \
 												src/TestStructureError.cpp \
 												src/TestStatistics.cpp \
@@ -22,13 +25,17 @@ CBUNIT_SOURCE_FILES = 	src/main.cpp \
 												src/FileInfo.cpp
 
 
-CBUNIT_EXAMPLES_FILES = examples/unit_simple.cpp
+CBUNIT_EXAMPLES_FILES = examples/unit_simple.cpp \
+												examples/unit_calculator.cpp
 
 CBUNIT_OBJECT_FILES = $(patsubst $(CBUNIT_SOURCE_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/%.o, $(CBUNIT_SOURCE_FILES))
 CBUNIT_EXAMPLES_OBJECT_FILES = $(patsubst $(CBUNIT_EXAMPLES_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/examples/%.o, $(CBUNIT_EXAMPLES_FILES))
 
 cbunit: $(CBUNIT_OBJECT_FILES)
 	ar rcs cbunit.lib $^
+
+cbunit-clean:
+	rm -rf $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) cbunit-examples cbunit.lib
 
 cbunit-examples: $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) examples/main.cpp
 	mkdir -p $(@D)
@@ -41,3 +48,5 @@ $(CBUNIT_BUILD_DIRECTORY)/%.o: $(CBUNIT_SOURCE_DIRECTORY)/%.cpp
 $(CBUNIT_BUILD_DIRECTORY)/examples/%.o: $(CBUNIT_EXAMPLES_DIRECTORY)/%.cpp
 	mkdir -p $(@D)
 	g++ -std=c++11 -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+
+.PHONY: cbunit-clean

@@ -13,7 +13,7 @@ namespace CBUnit
 
   void SpecTestReporter::beginFixture(Fixture& fixture) 
   {
-    _ostream << fixture.name() << "\r\n";
+    _ostream << _ostream.white << fixture.name() << _ostream.reset << "\r\n";
   }
 
   void SpecTestReporter::endFixture(Fixture& fixture) {}
@@ -22,7 +22,7 @@ namespace CBUnit
   {
     ++_depth;
     printTabs();
-    _ostream << group.name() << "\r\n";
+   _ostream << _ostream.white << group.name() << _ostream.reset << "\r\n";
   }
 
   void SpecTestReporter::endGroup(Group& group) 
@@ -42,6 +42,13 @@ namespace CBUnit
     --_depth;
   }
 
+  void SpecTestReporter::skipScenario(Scenario& scenario) 
+  {
+    printTabs();
+    _ostream << _ostream.darkGrey << "Skipping: " << scenario.name() << _ostream.reset << "\r\n";
+    --_depth;
+  }
+
   void SpecTestReporter::failScenario(Scenario& scenario, const TestError& error) 
   {
     printTabs();
@@ -53,21 +60,26 @@ namespace CBUnit
   {
     _ostream << "\r\n\r\n";
 
+    if (statistics.skipCount() != 0)
+    {
+      _ostream << _ostream.darkGrey << statistics.skipCount() << " skipped\r\n";
+    }
+    uint32_t totalRunCount = statistics.passCount() + statistics.failureCount();
     if (statistics.failures().empty())
     {
-      _ostream << _ostream.green << statistics.testCount() << " complete "
+      _ostream << _ostream.green << totalRunCount << " complete "
             << _ostream.reset << "(" << statistics.millisecondsElapsed() << "ms)\r\n\r\n";
     }
     else
     {
-      _ostream << _ostream.red << statistics.failures().size() << " of " << statistics.testCount() << " failed "
+      _ostream << _ostream.red << statistics.failures().size() << " of " << totalRunCount << " failed "
             << _ostream.reset << "(" << statistics.millisecondsElapsed() << "ms)\r\n\r\n";
 
       uint32_t i = 0;
       for (auto failure: statistics.failures())
       {
         _ostream << i++ << ") " << failure.scenario << ": " << _ostream.red << failure.error.message()
-            << _ostream.reset << "\r\n  at " << failure.error.filename() << ":" << failure.error.lineNumber() << "\r\n\r\n";
+            << _ostream.darkGrey << "\r\n  at " << failure.error.filename() << ":" << failure.error.lineNumber() << _ostream.reset << "\r\n\r\n";
       }
     }
     

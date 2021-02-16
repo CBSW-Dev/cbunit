@@ -5,7 +5,8 @@
 #include "ScenarioMacros.hpp"
 #include "TestErrorMacros.hpp"
 
-#define fixture(FixtureName, TestFunction)    CBUNIT_FIXTURE(FixtureName, TestFunction)
-#define group(GroupName, TestFunction)        CBUNIT_GROUP(GroupName, TestFunction)
-#define scenario(ScenarioName, TestFunction)  CBUNIT_SCENARIO(ScenarioName, TestFunction)
-#define failTest(message)                     CBUNIT_FAIL_TEST(message)
+#define fixture(...)                      CBUNIT_FIXTURE(__VA_ARGS__)
+#define group(...)                        CBUNIT_GROUP(__VA_ARGS__)
+#define scenario(...)                     CBUNIT_SCENARIO(__VA_ARGS__)
+#define failTest(...)                     CBUNIT_FAIL_TEST(__VA_ARGS__)
+#define skipTest                          ::CBUnit::TestAttributes::Skip

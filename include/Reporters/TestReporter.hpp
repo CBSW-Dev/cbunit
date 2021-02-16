@@ -19,6 +19,7 @@ namespace CBUnit
     virtual void endGroup(Group& group) = 0;
     virtual void beginScenario(Scenario& scenario) = 0;
     virtual void passScenario(Scenario& scenario) = 0;
+    virtual void skipScenario(Scenario& scenario) = 0;
     virtual void failScenario(Scenario& scenario, const TestError& error) = 0;
     virtual void end(const TestStatistics& statistics) = 0;
   };

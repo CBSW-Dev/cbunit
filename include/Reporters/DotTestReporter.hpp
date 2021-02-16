@@ -18,6 +18,7 @@ namespace CBUnit
     void endGroup(Group& group) override;
     void beginScenario(Scenario& scenario) override;
     void passScenario(Scenario& scenario) override;
+    void skipScenario(Scenario& scenario) override;
     void failScenario(Scenario& scenario, const TestError& error) override;
     void end(const TestStatistics& statistics) override;
   private:

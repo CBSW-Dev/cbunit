@@ -77,7 +77,7 @@ namespace CBUnit
       runFixture(*it);
     }
     end();
-    return 0;
+    return (_statistics.failureCount() == 0) ? 0 : -1;
   }
 
   TestRunner& TestRunner::instance()
@@ -129,24 +129,30 @@ namespace CBUnit
     _testMonitor.beginScenario(*scenario);
     _reporter.beginScenario(*scenario);
 
-    bool testPass = true;
-    try
+    if (scenario->isSkipped())
     {
-      scenario->run();
+      _statistics.skipTest();
+      _reporter.skipScenario(*scenario);
     }
-    catch (const TestError& error)
+    else
     {
-      testPass = false;
-      _statistics.failTest(scenario->name(), error);
-      _reporter.failScenario(*scenario, error);
+      bool testPass = true;
+      try
+      {
+        scenario->run();
+      }
+      catch (const TestError& error)
+      {
+        testPass = false;
+        _statistics.failTest(scenario->name(), error);
+        _reporter.failScenario(*scenario, error);
+      }
+      if (testPass)
+      {
+        _statistics.passTest();
+        _reporter.passScenario(*scenario);
+      }
     }
-    if (testPass)
-    {
-      _statistics.passTest();
-      _reporter.passScenario(*scenario);
-      
-    }
-    
     
     _testMonitor.endScenario();
     delete scenario;

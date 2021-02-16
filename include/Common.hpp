@@ -5,6 +5,7 @@
 #include <stack>
 #include <string>
 #include <functional>
+#include <initializer_list>
 
 namespace CBUnit
 {
