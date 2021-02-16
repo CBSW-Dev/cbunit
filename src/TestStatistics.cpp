@@ -6,7 +6,7 @@ namespace CBUnit
   void TestStatistics::begin()
   {
     _passes = 0;
-    _failures = 0;
+    _failures.clear();
     _startTime = std::chrono::steady_clock::now();
   }
     
@@ -22,24 +22,19 @@ namespace CBUnit
     ++_passes;
   }
 
-  void TestStatistics::failTest()
+  void TestStatistics::failTest(const std::string& scenario, const TestError& error)
   {
-    ++_failures;
+    _failures.push_back({scenario, error});
   }
 
-  uint32_t TestStatistics::passes() const
-  {
-    return _passes;
-  }
-
-  uint32_t TestStatistics::failures() const
+  const TestStatistics::TestFailures& TestStatistics::failures() const
   {
     return _failures;
   }
 
-  uint32_t TestStatistics::tests() const
+  uint32_t TestStatistics::testCount() const
   {
-    return _passes + _failures;
+    return _passes + _failures.size();
   }
     
   uint32_t TestStatistics::millisecondsElapsed() const

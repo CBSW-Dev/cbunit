@@ -5,5 +5,5 @@
 namespace {                                                                 \
   CBUNIT_FILEINFO                                                           \
   CBUNIT_LINEINFO                                                           \
-  ::CBUnit::FixtureDeclaration _cbunit_fixture(FixtureName, TestFunction);  \
+  ::CBUnit::FixtureDeclaration CBUNIT_CONCAT(_cbunit_fixture, __COUNTER__)(FixtureName, TestFunction);  \
 }

@@ -15,6 +15,7 @@ CBUNIT_SOURCE_FILES = 	src/main.cpp \
 												src/Reporters/SpecTestReporter.cpp \
 												src/OutputStreams/OutputStream.cpp \
 												src/OutputStreams/StdCoutOutputStream.cpp \
+												src/TestError.cpp \
 												src/TestStructureError.cpp \
 												src/TestStatistics.cpp \
 												src/LineInfo.cpp \

@@ -18,11 +18,12 @@ namespace CBUnit
     void endGroup(Group& group) override;
     void beginScenario(Scenario& scenario) override;
     void passScenario(Scenario& scenario) override;
-    void failScenario(Scenario& scenario) override;
+    void failScenario(Scenario& scenario, const TestError& error) override;
     void end(const TestStatistics& statistics) override;
   private:
     void printTabs();
     OutputStream& _ostream;
     uint32_t _depth = 0;
+    uint32_t _failureCount = 0;
   };
 }

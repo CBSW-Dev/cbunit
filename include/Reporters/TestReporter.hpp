@@ -4,6 +4,7 @@
 #include "Group.hpp"
 #include "Scenario.hpp"
 #include "TestStatistics.hpp"
+#include "TestError.hpp"
 
 namespace CBUnit
 {
@@ -18,7 +19,7 @@ namespace CBUnit
     virtual void endGroup(Group& group) = 0;
     virtual void beginScenario(Scenario& scenario) = 0;
     virtual void passScenario(Scenario& scenario) = 0;
-    virtual void failScenario(Scenario& scenario) = 0;
+    virtual void failScenario(Scenario& scenario, const TestError& error) = 0;
     virtual void end(const TestStatistics& statistics) = 0;
   };
 }

@@ -23,10 +23,13 @@ namespace CBUnit
   
   void DotTestReporter::passScenario(Scenario& scenario) 
   {
-    _ostream << ".";
+    _ostream << _ostream.green << "."  << _ostream.reset;
   }
 
-  void DotTestReporter::failScenario(Scenario& scenario) {}
+  void DotTestReporter::failScenario(Scenario& scenario, const TestError& error) 
+  {
+    _ostream << _ostream.red << "."  << _ostream.reset;
+  }
 
   void DotTestReporter::end(const TestStatistics& statistics) 
   {

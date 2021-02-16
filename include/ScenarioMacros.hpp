@@ -4,4 +4,4 @@
                                                                                                 \
 CBUNIT_FILEINFO                                                                                 \
 CBUNIT_LINEINFO                                                                                 \
-::CBUnit::ScenarioDeclaration CBUNIT_CONCAT(scenario_, __COUNTER__)(ScenarioName, TestFunction);
+::CBUnit::ScenarioDeclaration CBUNIT_CONCAT(_cbunit_scenario_, __COUNTER__)(ScenarioName, TestFunction);

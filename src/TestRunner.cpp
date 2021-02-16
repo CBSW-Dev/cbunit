@@ -1,4 +1,5 @@
 #include "TestRunner.hpp"
+#include "TestError.hpp"
 #include "TestStructureError.hpp"
 
 namespace CBUnit
@@ -37,12 +38,7 @@ namespace CBUnit
     {
     case TestMonitor::ObjectType::Fixture:
     case TestMonitor::ObjectType::Group:
-      _testMonitor.beginGroup(*group);
-      _reporter.beginGroup(*group);
-      group->run();
-      _reporter.endGroup(*group);
-      _testMonitor.endGroup();
-      delete group;
+      runGroup(group);
       break;
     case TestMonitor::ObjectType::None:
       _deferredTestStructureError = TestStructureError("Group cannot be added to the global scope", group->filename(), group->lineNumber());
@@ -60,13 +56,7 @@ namespace CBUnit
     {
     case TestMonitor::ObjectType::Fixture:
     case TestMonitor::ObjectType::Group:
-      _testMonitor.beginScenario(*scenario);
-      _reporter.beginScenario(*scenario);
-      scenario->run();
-      _reporter.passScenario(*scenario);
-      _statistics.passTest();
-      _testMonitor.endScenario();
-      delete scenario;
+      runScenario(scenario);
       break;
     case TestMonitor::ObjectType::None:
       _deferredTestStructureError = TestStructureError("Scenario cannot be added to the global scope", scenario->filename(), scenario->lineNumber());
@@ -79,25 +69,14 @@ namespace CBUnit
 
   int TestRunner::run()
   {
-    _reporter.begin();
-    _statistics.begin();
-    if (_deferredTestStructureError.message() != "")
-    {
-      throw _deferredTestStructureError;
-    }
+    begin();
     using FixtureListIterator = std::move_iterator<FixtureList::iterator>;
     
     for (FixtureListIterator it = std::make_move_iterator(_fixtures.begin()), end = std::make_move_iterator(_fixtures.end()); it != end; ++it)
     {
-      Fixture* fixture = *it;
-      _testMonitor.beginFixture(*fixture);
-      _reporter.beginFixture(*fixture);
-      (*it)->run();
-      _reporter.endFixture(*fixture);
-      _testMonitor.endFixture();
+      runFixture(*it);
     }
-    _statistics.end();
-    _reporter.end(_statistics);
+    end();
     return 0;
   }
 
@@ -108,5 +87,68 @@ namespace CBUnit
       _instance = new TestRunner;
     }
     return *_instance;
+  }
+
+  void TestRunner::begin()
+  {
+    _reporter.begin();
+    _statistics.begin();
+    if (_deferredTestStructureError.message() != "")
+    {
+      throw _deferredTestStructureError;
+    }
+  }
+
+  void TestRunner::end()
+  {
+    _statistics.end();
+    _reporter.end(_statistics);
+  }
+
+  void TestRunner::runFixture(Fixture* fixture)
+  {
+    _testMonitor.beginFixture(*fixture);
+    _reporter.beginFixture(*fixture);
+    fixture->run();
+    _reporter.endFixture(*fixture);
+    _testMonitor.endFixture();
+  }
+
+  void TestRunner::runGroup(Group* group)
+  {
+    _testMonitor.beginGroup(*group);
+    _reporter.beginGroup(*group);
+    group->run();
+    _reporter.endGroup(*group);
+    _testMonitor.endGroup();
+    delete group;
+  }
+
+  void TestRunner::runScenario(Scenario* scenario)
+  {
+    _testMonitor.beginScenario(*scenario);
+    _reporter.beginScenario(*scenario);
+
+    bool testPass = true;
+    try
+    {
+      scenario->run();
+    }
+    catch (const TestError& error)
+    {
+      testPass = false;
+      _statistics.failTest(scenario->name(), error);
+      _reporter.failScenario(*scenario, error);
+    }
+    if (testPass)
+    {
+      _statistics.passTest();
+      _reporter.passScenario(*scenario);
+      
+    }
+    
+    
+    _testMonitor.endScenario();
+    delete scenario;
   }
 }

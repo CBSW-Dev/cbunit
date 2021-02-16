@@ -18,7 +18,14 @@ fixture("Simple Fixture", []() {
 
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
-      
+      failTest("This is a test failure");
     });
+  });
+});
+
+
+fixture("Calculator", []() {
+  scenario("should add two numbers", []() {
+      
   });
 });

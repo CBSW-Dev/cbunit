@@ -24,6 +24,12 @@ namespace CBUnit
 
     static TestRunner& instance();
   private:
+    void begin();
+    void end();
+    void runFixture(Fixture* fixture);
+    void runGroup(Group* group);
+    void runScenario(Scenario* scenario);
+  private:
     using HeapFixture = HeapObject<Fixture>;
     using FixtureList = std::list<HeapFixture>;
     FixtureList _fixtures;
