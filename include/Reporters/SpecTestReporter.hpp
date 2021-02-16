@@ -1,13 +1,10 @@
 #pragma once
 
-#include "TestReporter.hpp"
-
-#include "OutputStreams/OutputStream.hpp"
-
+#include "FinalisingTestReporter.hpp"
 
 namespace CBUnit
 {
-  class SpecTestReporter: public TestReporter
+  class SpecTestReporter: public FinalisingTestReporter
   {
   public:
     SpecTestReporter(OutputStream& ostream);
@@ -23,7 +20,6 @@ namespace CBUnit
     void end(const TestStatistics& statistics) override;
   private:
     void printTabs();
-    OutputStream& _ostream;
     uint32_t _depth = 0;
     uint32_t _failureCount = 0;
   };

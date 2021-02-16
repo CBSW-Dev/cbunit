@@ -16,7 +16,7 @@ fixture("Simple Fixture", []() {
 
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
-      failTest("This is a test failure");
+      //failTest("This is a test failure");
     });
   });
 });

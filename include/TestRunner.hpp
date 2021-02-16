@@ -7,6 +7,7 @@
 #include "TestMonitor.hpp"
 #include "OutputStreams/ANSI8OutputStream.hpp"
 #include "OutputStreams/ANSI256OutputStream.hpp"
+#include "Reporters/MinTestReporter.hpp"
 #include "Reporters/DotTestReporter.hpp"
 #include "Reporters/SpecTestReporter.hpp"
 #include "TestStructureError.hpp"
@@ -39,8 +40,9 @@ namespace CBUnit
     TestMonitor _testMonitor;
     //ANSI8OutputStream _ostream;
     ANSI256OutputStream _ostream;
-    //DotTestReporter _reporter;
-    SpecTestReporter _reporter;
+    //MinTestReporter _reporter;
+    DotTestReporter _reporter;
+    //SpecTestReporter _reporter;
     TestStatistics _statistics;
     TestStructureError _deferredTestStructureError;
 

@@ -4,10 +4,10 @@
 
 namespace CBUnit
 {
-  class DotTestReporter: public FinalisingTestReporter
+  class MinTestReporter: public FinalisingTestReporter
   {
   public:
-    DotTestReporter(OutputStream& ostream);
+    MinTestReporter(OutputStream& ostream);
     void begin() override;
     void beginFixture(Fixture& fixture) override;
     void endFixture(Fixture& fixture) override;
@@ -17,6 +17,5 @@ namespace CBUnit
     void passScenario(Scenario& scenario) override;
     void skipScenario(Scenario& scenario) override;
     void failScenario(Scenario& scenario, const TestError& error) override;
-    void end(const TestStatistics& statistics) override;
   };
 }

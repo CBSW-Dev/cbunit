@@ -3,7 +3,7 @@
 namespace CBUnit
 {
   DotTestReporter::DotTestReporter(OutputStream& ostream):
-    _ostream(ostream)
+    FinalisingTestReporter(ostream)
   {}
 
   void DotTestReporter::begin() 
@@ -26,10 +26,9 @@ namespace CBUnit
     _ostream << _ostream.green << "."  << _ostream.reset;
   }
 
-
   void DotTestReporter::skipScenario(Scenario& scenario) 
   {
-    _ostream << _ostream.grey << "."  << _ostream.reset;
+    _ostream << _ostream.darkGrey << "."  << _ostream.reset;
   }
 
   void DotTestReporter::failScenario(Scenario& scenario, const TestError& error) 
@@ -37,8 +36,9 @@ namespace CBUnit
     _ostream << _ostream.red << "."  << _ostream.reset;
   }
 
-  void DotTestReporter::end(const TestStatistics& statistics) 
+  void DotTestReporter::end(const TestStatistics& statistics)
   {
-    _ostream << "\r\n\r\n";
+    _ostream << "\r\n";
+    FinalisingTestReporter::end(statistics);
   }
 }
