@@ -19,13 +19,9 @@ fixture("Simple Fixture", []() {
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
       //expect(0).to.be.at.least(1);
-
-      ::CBUnit::Expect<int> int_x(1, __FILE__, __LINE__);
-      int_x.to.have();
-      ::CBUnit::Expect<short> short_x(1, __FILE__, __LINE__);
-      short_x.to.have();
-      ::CBUnit::Expect<uint64_t> uint64_t_x(1, __FILE__, __LINE__);
-      uint64_t_x.to.have();
+      ::CBUnit::Expect<uint64_t> uint64_t_x(6, __FILE__, __LINE__);
+      uint64_t_x.to.be.greaterThan(5);
+      uint64_t_x.to.be.at.least(6);
     });
   });
 });
