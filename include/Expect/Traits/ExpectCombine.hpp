@@ -7,7 +7,28 @@ namespace CBUnit
   {
   public:
     ExpectCombine(const T& actual, const char* filename, uint32_t lineNumber):
-      ExpectBase<T>(actual, filename, lineNumber)
+      _actual(actual),
+      _filename(filename),
+      _lineNumber(lineNumber)
     {}
+
+    const T& actual() const override
+    {
+      return _actual;
+    }
+
+    const char* filename() const override
+    {
+      return _filename;
+    }
+
+    uint32_t lineNumber() const override
+    {
+      return _lineNumber;
+    }
+  private:
+    const T& _actual;
+    const char* _filename;
+    uint32_t _lineNumber;
   };
 }

@@ -1,23 +1,42 @@
 #pragma once
 #include "ExpectBase.hpp"
+#include "ExpectLogic.hpp"
 
 #include <iostream>
 
+
 namespace CBUnit
 {
-  template <class T>
+  namespace
+  {
+    template <class T, class Logic> class TestExpectationGreaterThanFailure {};
+  
+    template <class T> class TestExpectationGreaterThanFailure<T, ExpectLogic>: public TestError
+    {
+    public:
+      TestExpectationGreaterThanFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be greater than"), filename, lineNumber)
+      {}
+    };
+
+    template <class T> class TestExpectationGreaterThanFailure<T, ExpectInvertingLogic>: public TestError
+    {
+    public:
+      TestExpectationGreaterThanFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be greater than"), filename, lineNumber)
+      {}
+    };
+  }
+
+  template <class T, class Logic = ExpectLogic>
   class ExpectGreaterThan: public virtual ExpectBase<T>
   {
   public:
     void greaterThan(const T& expected) const
     {
-      if (*this->_actual <= expected)
+      if (Logic::logic(this->actual() <= expected))
       {
-        std::cout << "Not Greater Than" <<std::endl;
-      }
-      else
-      {
-        std::cout << "Greater Than" <<std::endl;
+        throw TestExpectationGreaterThanFailure<T, Logic>(this->actual(), expected, this->filename(), this->lineNumber());
       }
     }
 

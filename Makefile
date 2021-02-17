@@ -46,14 +46,14 @@ cbunit-clean:
 
 cbunit-examples: $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) examples/main.cpp
 	mkdir -p $(@D)
-	g++ -std=c++11 -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+	g++ -std=c++11 -fno-operator-names -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
 
 $(CBUNIT_BUILD_DIRECTORY)/%.o: $(CBUNIT_SOURCE_DIRECTORY)/%.cpp
 	mkdir -p $(@D)
-	g++ -std=c++11 -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+	g++ -std=c++11 -fno-operator-names -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
 
 $(CBUNIT_BUILD_DIRECTORY)/examples/%.o: $(CBUNIT_EXAMPLES_DIRECTORY)/%.cpp
 	mkdir -p $(@D)
-	g++ -std=c++11 -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+	g++ -std=c++11 -fno-operator-names -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
 
 .PHONY: cbunit-clean

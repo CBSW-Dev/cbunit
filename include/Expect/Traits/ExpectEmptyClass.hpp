@@ -2,5 +2,5 @@
 
 namespace CBUnit
 {
-  class ExpectEmptyClass {};
+  template<class T> class ExpectEmptyClass {};
 }

@@ -5,34 +5,73 @@
 #include "ExpectEmptyClass.hpp"
 #include "Expect/Chains/ExpectEquals.hpp"
 #include "Expect/Chains/ExpectGreaterThan.hpp"
+#include "Expect/Chains/ExpectGreaterThanOrEqual.hpp"
 
 namespace CBUnit
 {
+  template <bool Value, typename T> class ExpectConditional
+  {
+  public:
+    using Type = typename std::conditional<Value, T, ExpectEmptyClass<T>>::type;
+  };
+
   template <typename T, typename Traits = typename ExpectTraitsSelect<T>::Type> class ExpectBuilder
   {
   public:
     ExpectBuilder(const T& actual, const char* filename, uint32_t lineNumber):
+      not(actual, filename, lineNumber),
       to(actual, filename, lineNumber)
     {}
 
-    using Be = ExpectCombine<T, 
-      typename std::conditional<Traits::hasGreaterThan, ExpectGreaterThan<T>, ExpectEmptyClass>::type
+    template <class Logic> using BeAt = ExpectCombine<T, 
+      typename ExpectConditional<Traits::hasGreaterThanOrEqual, ExpectAtLeast<T, Logic>>::Type
     >;
 
-    using ToBase = ExpectCombine<T, 
-      typename std::conditional<Traits::hasEquals, ExpectEquals<T>, ExpectEmptyClass>::type
+    template <class Logic> using BeBase = ExpectCombine<T, 
+      typename ExpectConditional<Traits::hasGreaterThan, ExpectGreaterThan<T, Logic>>::Type,
+      typename ExpectConditional<Traits::hasGreaterThanOrEqual, ExpectGreaterThanOrEqual<T, Logic>>::Type
     >;
-    class To: public ToBase
+
+    template <class Logic> class Be: public BeBase<Logic>
+    {
+    public:
+      Be(const T& actual, const char* filename, uint32_t lineNumber):
+        BeBase<Logic>(actual, filename, lineNumber),
+        at(actual, filename, lineNumber)
+      {}
+
+      BeAt<Logic> at;
+    };
+
+    
+    template <class Logic> using ToBase = ExpectCombine<T, 
+      typename ExpectConditional<Traits::hasEquals, ExpectEquals<T, Logic>>::Type
+    >;
+
+    template <class Logic>
+    class To: public ToBase<Logic>
     {
     public:
       To(const T& actual, const char* filename, uint32_t lineNumber):
-        ToBase(actual, filename, lineNumber),
+        ToBase<Logic>(actual, filename, lineNumber),
         be(actual, filename, lineNumber)
       {}
 
-      Be be;
+      Be<Logic> be;
     };
-    To to;
+
+    class Not
+    {
+    public:
+      Not(const T& actual, const char* filename, uint32_t lineNumber):
+        to(actual, filename, lineNumber)
+      {}
+
+      To<ExpectInvertingLogic> to;
+    };
+
+    Not not;
+    To<ExpectLogic> to;
   };
 }
 

@@ -16,8 +16,7 @@ fixture("Simple Fixture", []() {
 
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
-      expect(1).to.equal(0);
-      expect(1).to.be.above(0);
+      expect(0).to.be.at.least(1);
     });
   });
 });
