@@ -1,9 +1,7 @@
-#include "Fixture.hpp"
-#include "TestRunner.hpp"
-#include "FileInfo.hpp"
-#include "LineInfo.hpp"
-
-#include <iostream>
+#include "TestStructure/Fixture.hpp"
+#include "TestStructure/TestRunner.hpp"
+#include "TestStructure/FileInfo.hpp"
+#include "TestStructure/LineInfo.hpp"
 
 namespace CBUnit
 {

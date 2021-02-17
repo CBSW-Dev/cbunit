@@ -1,9 +1,7 @@
-#include "Scenario.hpp"
-#include "TestRunner.hpp"
-#include "FileInfo.hpp"
-#include "LineInfo.hpp"
-
-#include <iostream>
+#include "TestStructure/Scenario.hpp"
+#include "TestStructure/TestRunner.hpp"
+#include "TestStructure/FileInfo.hpp"
+#include "TestStructure/LineInfo.hpp"
 
 namespace CBUnit
 {

@@ -1,4 +1,4 @@
-#include "TestMonitor.hpp"
+#include "TestStructure/TestMonitor.hpp"
 
 namespace CBUnit
 {

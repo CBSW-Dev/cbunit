@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Fixture.hpp"
-#include "Group.hpp"
-#include "Scenario.hpp"
-#include "TestStatistics.hpp"
-#include "TestError.hpp"
+#include "TestStructure/Fixture.hpp"
+#include "TestStructure/Group.hpp"
+#include "TestStructure/Scenario.hpp"
+#include "TestStructure/TestStatistics.hpp"
+#include "TestStructure/TestError.hpp"
 
 namespace CBUnit
 {

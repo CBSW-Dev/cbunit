@@ -5,11 +5,7 @@
 #include "Group.hpp"
 #include "Scenario.hpp"
 #include "TestMonitor.hpp"
-#include "OutputStreams/ANSI8OutputStream.hpp"
-#include "OutputStreams/ANSI256OutputStream.hpp"
-#include "Reporters/MinTestReporter.hpp"
-#include "Reporters/DotTestReporter.hpp"
-#include "Reporters/SpecTestReporter.hpp"
+#include "Reporters/TestReporter.hpp"
 #include "TestStructureError.hpp"
 
 namespace CBUnit
@@ -18,6 +14,7 @@ namespace CBUnit
   {
   public:
     TestRunner();
+    void setReporter(TestReporter& reporter);
     void addFixture(Fixture* fixture);
     void addGroup(Group* group);
     void addScenario(Scenario* scenario);
@@ -38,11 +35,7 @@ namespace CBUnit
 
     Fixture* _currentFixture = nullptr;
     TestMonitor _testMonitor;
-    //ANSI8OutputStream _ostream;
-    ANSI256OutputStream _ostream;
-    //MinTestReporter _reporter;
-    DotTestReporter _reporter;
-    //SpecTestReporter _reporter;
+    TestReporter* _reporter;
     TestStatistics _statistics;
     TestStructureError _deferredTestStructureError;
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Fixture.hpp"
-#include "Group.hpp"
-#include "Scenario.hpp"
+#include "TestStructure/Fixture.hpp"
+#include "TestStructure/Group.hpp"
+#include "TestStructure/Scenario.hpp"
 
 namespace CBUnit
 {

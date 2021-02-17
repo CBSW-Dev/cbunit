@@ -1,16 +1,21 @@
-#include "TestRunner.hpp"
-#include "TestError.hpp"
-#include "TestStructureError.hpp"
+#include "TestStructure/TestRunner.hpp"
+#include "TestStructure/TestError.hpp"
+#include "TestStructure/TestStructureError.hpp"
 
 namespace CBUnit
 {
   TestRunner* TestRunner::_instance = nullptr;
 
   TestRunner::TestRunner():
-    _reporter(_ostream),
+    _reporter(nullptr),
     _deferredTestStructureError("", "", 0)
   {}
 
+  void TestRunner::setReporter(TestReporter& reporter)
+  {
+    _reporter = &reporter;
+  }
+  
   void TestRunner::addFixture(Fixture* fixture)
   {
      TestMonitor::Object object = _testMonitor.currentObject();
@@ -77,7 +82,7 @@ namespace CBUnit
       runFixture(*it);
     }
     end();
-    return (_statistics.failureCount() == 0) ? 0 : -1;
+    return (_statistics.failureCount() == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
   }
 
   TestRunner& TestRunner::instance()
@@ -91,7 +96,7 @@ namespace CBUnit
 
   void TestRunner::begin()
   {
-    _reporter.begin();
+    _reporter->begin();
     _statistics.begin();
     if (_deferredTestStructureError.message() != "")
     {
@@ -102,24 +107,24 @@ namespace CBUnit
   void TestRunner::end()
   {
     _statistics.end();
-    _reporter.end(_statistics);
+    _reporter->end(_statistics);
   }
 
   void TestRunner::runFixture(Fixture* fixture)
   {
     _testMonitor.beginFixture(*fixture);
-    _reporter.beginFixture(*fixture);
+    _reporter->beginFixture(*fixture);
     fixture->run();
-    _reporter.endFixture(*fixture);
+    _reporter->endFixture(*fixture);
     _testMonitor.endFixture();
   }
 
   void TestRunner::runGroup(Group* group)
   {
     _testMonitor.beginGroup(*group);
-    _reporter.beginGroup(*group);
+    _reporter->beginGroup(*group);
     group->run();
-    _reporter.endGroup(*group);
+    _reporter->endGroup(*group);
     _testMonitor.endGroup();
     delete group;
   }
@@ -127,12 +132,12 @@ namespace CBUnit
   void TestRunner::runScenario(Scenario* scenario)
   {
     _testMonitor.beginScenario(*scenario);
-    _reporter.beginScenario(*scenario);
+    _reporter->beginScenario(*scenario);
 
     if (scenario->isSkipped())
     {
       _statistics.skipTest();
-      _reporter.skipScenario(*scenario);
+      _reporter->skipScenario(*scenario);
     }
     else
     {
@@ -145,12 +150,12 @@ namespace CBUnit
       {
         testPass = false;
         _statistics.failTest(scenario->name(), error);
-        _reporter.failScenario(*scenario, error);
+        _reporter->failScenario(*scenario, error);
       }
       if (testPass)
       {
         _statistics.passTest();
-        _reporter.passScenario(*scenario);
+        _reporter->passScenario(*scenario);
       }
     }
     

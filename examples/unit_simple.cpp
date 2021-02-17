@@ -16,7 +16,8 @@ fixture("Simple Fixture", []() {
 
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
-      //failTest("This is a test failure");
+      expect(1).to.equal(0);
+      expect(1).to.be.above(0);
     });
   });
 });

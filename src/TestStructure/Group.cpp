@@ -1,9 +1,8 @@
-#include "Group.hpp"
-#include "TestRunner.hpp"
-#include "FileInfo.hpp"
-#include "LineInfo.hpp"
+#include "TestStructure/Group.hpp"
+#include "TestStructure/TestRunner.hpp"
+#include "TestStructure/FileInfo.hpp"
+#include "TestStructure/LineInfo.hpp"
 
-#include <iostream>
 
 namespace CBUnit
 {

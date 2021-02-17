@@ -1,4 +1,4 @@
-#include "FileInfo.hpp"
+#include "TestStructure/FileInfo.hpp"
 
 namespace CBUnit
 {

@@ -1,4 +1,4 @@
-#include "TestStructureError.hpp"
+#include "TestStructure/TestStructureError.hpp"
 
 namespace CBUnit
 {

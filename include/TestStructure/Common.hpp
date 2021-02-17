@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <list>
 #include <stack>
+#include <map>
 #include <string>
 #include <functional>
 #include <initializer_list>

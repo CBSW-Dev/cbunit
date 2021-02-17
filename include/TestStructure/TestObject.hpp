@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.hpp"
-#include "TestAttrbutes.hpp"
+#include "TestAttributes.hpp"
 
 namespace CBUnit
 {

@@ -73,6 +73,8 @@
     "utility": "cpp",
     "vector": "cpp",
     "*.tcc": "cpp",
-    "memory_resource": "cpp"
+    "memory_resource": "cpp",
+    "__tree": "cpp",
+    "map": "cpp"
   }
 }

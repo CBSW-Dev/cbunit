@@ -1,4 +1,4 @@
-#include "TestObject.hpp"
+#include "TestStructure/TestObject.hpp"
 
 namespace CBUnit
 {

@@ -1,4 +1,4 @@
-#include "LineInfo.hpp"
+#include "TestStructure/LineInfo.hpp"
 
 namespace CBUnit
 {
