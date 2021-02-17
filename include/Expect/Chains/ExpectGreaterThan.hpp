@@ -1,9 +1,8 @@
 #pragma once
 #include "ExpectBase.hpp"
 #include "ExpectLogic.hpp"
-
-#include <iostream>
-
+#include "TestExpectationMessageBuilder.hpp"
+#include "TestStructure/TestError.hpp"
 
 namespace CBUnit
 {

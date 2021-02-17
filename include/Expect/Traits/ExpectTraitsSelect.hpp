@@ -9,7 +9,6 @@ namespace CBUnit
   template <typename T> class ExpectTraitsSelect
   {
   public:
-   
     using Type = typename ExpectSelectSwitch<
       ExpectSelectCondition<std::is_integral<T>::value, ExpectIntegerTraits>,
       ExpectTraits

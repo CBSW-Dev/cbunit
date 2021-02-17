@@ -4,9 +4,6 @@
 #include "TestExpectationMessageBuilder.hpp"
 #include "TestStructure/TestError.hpp"
 
-#include <sstream>
-#include <iostream>
-
 namespace CBUnit
 {
   namespace

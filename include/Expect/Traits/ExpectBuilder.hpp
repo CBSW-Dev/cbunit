@@ -6,6 +6,8 @@
 #include "Expect/Chains/ExpectEquals.hpp"
 #include "Expect/Chains/ExpectGreaterThan.hpp"
 #include "Expect/Chains/ExpectGreaterThanOrEqual.hpp"
+#include "Expect/Chains/ExpectLessThan.hpp"
+#include "Expect/Chains/ExpectLessThanOrEqual.hpp"
 
 namespace CBUnit
 {
@@ -24,12 +26,16 @@ namespace CBUnit
     {}
 
     template <class Logic> using BeAt = ExpectCombine<T, 
-      typename ExpectConditional<Traits::hasGreaterThanOrEqual, ExpectAtLeast<T, Logic>>::Type
+      typename ExpectConditional<Traits::hasGreaterThanOrEqual, ExpectAtLeast<T, Logic>>::Type,
+      typename ExpectConditional<Traits::hasLessThanOrEqual, ExpectAtMost<T, Logic>>::Type
+
     >;
 
     template <class Logic> using BeBase = ExpectCombine<T, 
       typename ExpectConditional<Traits::hasGreaterThan, ExpectGreaterThan<T, Logic>>::Type,
-      typename ExpectConditional<Traits::hasGreaterThanOrEqual, ExpectGreaterThanOrEqual<T, Logic>>::Type
+      typename ExpectConditional<Traits::hasGreaterThanOrEqual, ExpectGreaterThanOrEqual<T, Logic>>::Type,
+      typename ExpectConditional<Traits::hasLessThan, ExpectLessThan<T, Logic>>::Type,
+      typename ExpectConditional<Traits::hasLessThanOrEqual, ExpectLessThanOrEqual<T, Logic>>::Type
     >;
 
     template <class Logic> class Be: public BeBase<Logic>
