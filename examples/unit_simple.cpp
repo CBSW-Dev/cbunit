@@ -1,7 +1,5 @@
 #include "cbunit.hpp"
 #include "cbunit_macros.hpp"
-#include "Expect/Traits/New/ExpectRoot.hpp"
-#include "Expect/Traits/New/ExpectInteger.hpp"
 
 fixture("Simple Fixture", []() {
   group("Simple Group", []() {
@@ -19,9 +17,14 @@ fixture("Simple Fixture", []() {
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
       //expect(0).to.be.at.least(1);
-      ::CBUnit::Expect<uint64_t> uint64_t_x(6, __FILE__, __LINE__);
-      uint64_t_x.to.be.greaterThan(5);
-      uint64_t_x.to.be.at.least(6);
+      uint32_t x = 7;
+      expect(x).to.equal(5);
+      expect(x).to.be.greaterThan(5);
+      expect(x).to.be.greaterThanOrEqual(5);
+      expect(x).to.be.lessThan(5);
+      expect(x).to.be.lessThanOrEqual(5);
+      expect(x).to.be.at.least(7);
+      expect(x).to.be.at.most(7);
     });
   });
 });
