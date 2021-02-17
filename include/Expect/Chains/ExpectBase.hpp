@@ -11,7 +11,13 @@ namespace CBUnit
     virtual uint32_t lineNumber() const = 0;
   };
 
-  template <typename T, typename Class>
+  template <typename T> class ExpectEmptyBaseClass 
+  {
+  public:
+    ExpectEmptyBaseClass(const T& actual, const char* filename, uint32_t lineNumber) {}
+  };
+
+  template <typename T, typename Class = ExpectEmptyBaseClass<T>>
   class ExpectBaseMixin: public virtual ExpectBase<T>, public Class
   {
   public:

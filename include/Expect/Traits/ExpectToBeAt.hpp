@@ -1,6 +1,5 @@
 #pragma once
 #include "Expect/Chains/ExpectLogic.hpp"
-#include "ExpectSelect.hpp"
 
 namespace CBUnit
 {

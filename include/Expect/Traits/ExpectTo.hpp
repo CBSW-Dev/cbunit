@@ -2,7 +2,6 @@
 #include "Expect/Chains/ExpectLogic.hpp"
 #include "Expect/Chains/ExpectEquals.hpp"
 #include "ExpectToBe.hpp"
-#include "ExpectSelect.hpp"
 
 namespace CBUnit
 {
