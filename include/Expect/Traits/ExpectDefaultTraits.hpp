@@ -2,7 +2,7 @@
 
 namespace CBUnit
 {
-  class ExpectTraits
+  class ExpectDefaultTraits
   {
   public:
     static constexpr bool hasEquals = true;
