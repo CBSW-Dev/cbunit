@@ -1,0 +1,19 @@
+#pragma once
+#include "Expect/Chains/ExpectLogic.hpp"
+#include "ExpectToBeAt.hpp"
+namespace CBUnit
+{
+  //default ExpectToBe has nothing
+  template <typename T, typename Logic> class ExpectToBe {};
+
+  template <typename T, typename Logic> class ExpectToBeBase: public ExpectToBe<typename ExpectSelect<T>::Type, Logic>
+  {
+  public:
+    ExpectToBeBase(const T& actual, const char* filename, uint32_t lineNumber):
+      at(actual, filename, lineNumber)
+    {}
+    
+    ExpectBaseMixin<T, ExpectToBeAtBase<T, Logic>> at;
+  };
+}
+

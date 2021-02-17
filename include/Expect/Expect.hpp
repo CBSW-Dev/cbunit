@@ -1,19 +1,13 @@
 #pragma once
-#include "Traits/ExpectBuilder.hpp"
+#include "Traits/New/ExpectRoot.hpp"
 
 #include <string>
 
 namespace CBUnit
 {
   //By defining this as a class, it allows for specialisation of custom classes
-	template <class Type> class Expect: public ExpectBuilder<Type> 
-  {
-  public:
-    Expect(const Type& actual, const char* filename, uint32_t lineNumber):
-      ExpectBuilder<Type>(actual, filename, lineNumber)
-    {}
-  };
-
+	template <class Type> using Expect = ExpectRoot<Type>;
+  
 	class MakeExpect 
 	{
 	public:
