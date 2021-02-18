@@ -28,9 +28,12 @@ fixture("Simple Fixture", []() {
       // expect(x).to.be.at.least(7);
       // expect(x).to.be.at.most(7);
       bool z;
+      void* otherptr;
+      void* ptr = otherptr;
+      expect(ptr).to.equal(otherptr);
       expect(y).to.be.within(0.11).of(90.0);
       //expect(z).to.equal(true);
-      expect(str).to.contain("abx");
+      expect(str).to.contain("bce");
     });
   });
 });

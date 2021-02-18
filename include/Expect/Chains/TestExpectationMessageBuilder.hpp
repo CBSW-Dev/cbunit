@@ -4,6 +4,7 @@
 #include "TestStructure/TestError.hpp"
 
 #include <sstream>
+#include <iomanip>
 
 namespace CBUnit
 {
@@ -35,6 +36,17 @@ namespace CBUnit
       static std::string build(bool value)
       {
         return value ? "true" : "false";
+      }
+    };
+
+    template <class T> class StringBuilder<T*>
+    {
+    public:
+      static std::string build(const T* value)
+      {
+        std::stringstream ss;
+        ss << "0x" << std::hex << std::setw(sizeof(void*)) << std::setfill('0') << reinterpret_cast<std::size_t>(value);
+        return ss.str(); 
       }
     };
   }
