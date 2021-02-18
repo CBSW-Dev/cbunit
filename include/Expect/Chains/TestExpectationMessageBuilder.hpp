@@ -7,6 +7,38 @@
 
 namespace CBUnit
 {
+  namespace
+  {
+    template <class T> class StringBuilder
+    {
+    public:
+      static std::string build(const T& value)
+      {
+        std::stringstream ss;
+        ss << value;
+        return ss.str();
+      }
+    };
+
+    template <> class StringBuilder<std::string>
+    {
+    public:
+      static std::string build(const std::string& value)
+      {
+        return std::string("\"") + value + "\"";
+      }
+    };
+
+    template <> class StringBuilder<bool>
+    {
+    public:
+      static std::string build(bool value)
+      {
+        return value ? "true" : "false";
+      }
+    };
+  }
+
   class TestExpectationMessageBuilder
   {
   public:
@@ -14,11 +46,11 @@ namespace CBUnit
     {
       std::stringstream ss;
       ss << "Expected ";
-      ss << actual;
+      ss << StringBuilder<T>::build(actual);
       ss << " ";
       ss << conjunction;
       ss << " ";
-      ss << expected;
+      ss << StringBuilder<T>::build(expected);;
       return ss.str();
     }
   };
