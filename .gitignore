@@ -18,6 +18,9 @@ build/*
 *.a
 *.lib
 
+# VSCode folder
+.vscode
+
 # Executables
 *.bin
 cbunit-examples
