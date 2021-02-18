@@ -1,8 +1,9 @@
 #pragma once
 #include "ExpectTo.hpp"
+#include "ExpectIs.hpp"
 
 #include "Expect/Chains/ExpectEquals.hpp"
-#include "ExpectIs.hpp"
+
 
 namespace CBUnit
 {

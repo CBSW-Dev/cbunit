@@ -3,3 +3,4 @@
 #include "ExpectInteger.hpp"
 #include "ExpectFloatingPoint.hpp"
 #include "ExpectString.hpp"
+#include "ExpectPointer.hpp"

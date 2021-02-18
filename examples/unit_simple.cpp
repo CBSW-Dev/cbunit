@@ -30,10 +30,27 @@ fixture("Simple Fixture", []() {
       bool z;
       void* otherptr;
       void* ptr = otherptr;
-      expect(ptr).to.equal(otherptr);
+      expect(ptr).to.be.null();
       expect(y).to.be.within(0.11).of(90.0);
       //expect(z).to.equal(true);
       expect(str).to.contain("bce");
     });
+  });
+});
+
+
+class Calculator
+{
+public:
+  int add(int x, int y)
+  {
+    return x+y;
+  }
+};
+
+fixture("Calculator", []() {
+  scenario("should add two integers", []() {
+    Calculator calculator;
+    expect(calculator.add(5, 7)).to.equal(12);
   });
 });

@@ -65,5 +65,14 @@ namespace CBUnit
       ss << StringBuilder<T>::build(expected);;
       return ss.str();
     }
+    template <class T> static std::string buildMessage(const T& actual, const std::string& suffix)
+    {
+      std::stringstream ss;
+      ss << "Expected ";
+      ss << StringBuilder<T>::build(actual);
+      ss << " ";
+      ss << suffix;
+      return ss.str();
+    }
   };
 }
