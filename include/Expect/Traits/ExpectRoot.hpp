@@ -2,6 +2,10 @@
 #include "Expect/Chains/ExpectLogic.hpp"
 #include "Expect/Chains/ExpectBase.hpp"
 #include "ExpectTo.hpp"
+#include "ExpectIs.hpp"
+
+#include <iostream>
+
 namespace CBUnit
 {
   template <typename T> class ExpectRoot
@@ -11,7 +15,7 @@ namespace CBUnit
       not(actual, filename, lineNumber),
       to(actual, filename, lineNumber)
     {}
-
+     
     class Not
     {
     public:

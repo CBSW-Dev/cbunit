@@ -2,6 +2,7 @@
 #include "Expect/Chains/ExpectLogic.hpp"
 #include "Expect/Chains/ExpectEquals.hpp"
 #include "ExpectToBe.hpp"
+#include "ExpectToHave.hpp"
 
 namespace CBUnit
 {
@@ -12,10 +13,12 @@ namespace CBUnit
   {
   public:
     ExpectToBase(const T& actual, const char* filename, uint32_t lineNumber):
-      be(actual, filename, lineNumber)
+      be(actual, filename, lineNumber),
+      have(actual, filename, lineNumber)
     {}
 
     ExpectBaseMixin<T, ExpectToBeBase<T, Logic>> be;
+    ExpectBaseMixin<T, ExpectToHaveBase<T, Logic>> have;
   };
 }
 
