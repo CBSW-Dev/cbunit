@@ -13,7 +13,7 @@ namespace CBUnit
     template <class T> class TestExpectationLessThanOrEqualFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationLessThanOrEqualFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationLessThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be less than or equal"), filename, lineNumber)
       {}
     };
@@ -21,7 +21,7 @@ namespace CBUnit
     template <class T> class TestExpectationLessThanOrEqualFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationLessThanOrEqualFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationLessThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be less than or equal"), filename, lineNumber)
       {}
     };
@@ -31,7 +31,7 @@ namespace CBUnit
     template <class T> class TestExpectationAtMostFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationAtMostFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationAtMostFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be at most"), filename, lineNumber)
       {}
     };
@@ -39,7 +39,7 @@ namespace CBUnit
     template <class T> class TestExpectationAtMostFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationAtMostFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationAtMostFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be at most"), filename, lineNumber)
       {}
     };
@@ -49,7 +49,7 @@ namespace CBUnit
   class ExpectLessThanOrEqual: public virtual ExpectBase<T>
   {
   public:
-    void lessThanOrEqual(const T& expected) const
+    void lessThanOrEqual(T expected) const
     {
       if (Logic::logic(this->actual() < expected))
       {
@@ -58,14 +58,14 @@ namespace CBUnit
     }
 
     //aliases
-    void lte(const T& expected) const {lessThanOrEqual(expected);}
+    void lte(T expected) const {lessThanOrEqual(expected);}
   };
 
   template <class T, class Logic = ExpectLogic>
   class ExpectAtMost: public virtual ExpectBase<T>
   {
   public:
-    void most(const T& expected) const
+    void most(T expected) const
     {
       if (Logic::logic(this->actual() < expected))
       {

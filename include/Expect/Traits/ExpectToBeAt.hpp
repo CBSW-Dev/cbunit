@@ -9,7 +9,7 @@ namespace CBUnit
   template <typename T, typename Logic> class ExpectToBeAtBase: public ExpectToBeAt<T, Logic> 
   {
   public:
-    ExpectToBeAtBase(const T& actual, const char* filename, uint32_t lineNumber) {}
+    ExpectToBeAtBase(T actual, const char* filename, uint32_t lineNumber) {}
   };
 }
 

@@ -13,7 +13,7 @@ namespace CBUnit
     template <class T> class TestExpectationGreaterThanOrEqualFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationGreaterThanOrEqualFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationGreaterThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be greater than or equal"), filename, lineNumber)
       {}
     };
@@ -21,7 +21,7 @@ namespace CBUnit
     template <class T> class TestExpectationGreaterThanOrEqualFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationGreaterThanOrEqualFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationGreaterThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be greater than or equal"), filename, lineNumber)
       {}
     };
@@ -31,7 +31,7 @@ namespace CBUnit
     template <class T> class TestExpectationAtLeastFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationAtLeastFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationAtLeastFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be at least"), filename, lineNumber)
       {}
     };
@@ -39,7 +39,7 @@ namespace CBUnit
     template <class T> class TestExpectationAtLeastFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationAtLeastFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationAtLeastFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be at least"), filename, lineNumber)
       {}
     };
@@ -49,7 +49,7 @@ namespace CBUnit
   class ExpectGreaterThanOrEqual: public virtual ExpectBase<T>
   {
   public:
-    void greaterThanOrEqual(const T& expected) const
+    void greaterThanOrEqual(T expected) const
     {
       if (Logic::logic(this->actual() < expected))
       {
@@ -58,14 +58,14 @@ namespace CBUnit
     }
 
     //aliases
-    void gte(const T& expected) const {greaterThanOrEqual(expected);}
+    void gte(T expected) const {greaterThanOrEqual(expected);}
   };
 
   template <class T, class Logic = ExpectLogic>
   class ExpectAtLeast: public virtual ExpectBase<T>
   {
   public:
-    void least(const T& expected) const
+    void least(T expected) const
     {
       if (Logic::logic(this->actual() < expected))
       {

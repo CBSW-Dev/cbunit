@@ -6,7 +6,7 @@ namespace CBUnit
   class ExpectBase
   {
   protected:
-    virtual const T& actual() const = 0;
+    virtual T actual() const = 0;
     virtual const char* filename() const = 0;
     virtual uint32_t lineNumber() const = 0;
   };
@@ -14,21 +14,21 @@ namespace CBUnit
   template <typename T> class ExpectEmptyBaseClass 
   {
   public:
-    ExpectEmptyBaseClass(const T& actual, const char* filename, uint32_t lineNumber) {}
+    ExpectEmptyBaseClass(T actual, const char* filename, uint32_t lineNumber) {}
   };
 
   template <typename T, typename Class = ExpectEmptyBaseClass<T>>
   class ExpectBaseMixin: public virtual ExpectBase<T>, public Class
   {
   public:
-    ExpectBaseMixin(const T& actual, const char* filename, uint32_t lineNumber):
+    ExpectBaseMixin(T actual, const char* filename, uint32_t lineNumber):
       Class(actual, filename, lineNumber),
       _actual(actual),
       _filename(filename),
       _lineNumber(lineNumber)
     {}
 
-    const T& actual() const override
+    T actual() const override
     {
       return _actual;
     }
@@ -42,7 +42,7 @@ namespace CBUnit
       return _lineNumber;
     }
   private:
-    const T& _actual;
+    T _actual;
     const char* _filename;
     uint32_t _lineNumber;
   };

@@ -12,7 +12,7 @@ namespace CBUnit
     template <typename T> class TestExpectationNullFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationNullFailure(const T& actual, const char* filename, uint32_t lineNumber):
+      TestExpectationNullFailure(T actual, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, "to be null"), filename, lineNumber)
       {}
     };
@@ -20,7 +20,7 @@ namespace CBUnit
     template <typename T> class TestExpectationNullFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationNullFailure(const T& actual, const char* filename, uint32_t lineNumber):
+      TestExpectationNullFailure(T actual, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, "not to be null"), filename, lineNumber)
       {}
     };
@@ -30,7 +30,7 @@ namespace CBUnit
     template <typename T> class TestExpectationValidFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationValidFailure(const T& actual, const char* filename, uint32_t lineNumber):
+      TestExpectationValidFailure(T actual, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, "to be valid"), filename, lineNumber)
       {}
     };
@@ -38,7 +38,7 @@ namespace CBUnit
     template <typename T> class TestExpectationValidFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationValidFailure(const T& actual, const char* filename, uint32_t lineNumber):
+      TestExpectationValidFailure(T actual, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, "not to be valid"), filename, lineNumber)
       {}
     };

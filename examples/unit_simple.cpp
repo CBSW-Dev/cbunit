@@ -18,10 +18,10 @@ fixture("Simple Fixture", []() {
     scenario("Simple Scenario 2", []() {
       const char* cstring = "Hello";
       std::string string = "Hello";
-
       
       expect(cstring).string.to.contain("el");
       expect(string).length.to.equal(5);
+      expect(cstring).size.to.equal(sizeof(void*));
     });
   });
 });

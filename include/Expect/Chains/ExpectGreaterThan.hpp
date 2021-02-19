@@ -13,7 +13,7 @@ namespace CBUnit
     template <class T> class TestExpectationGreaterThanFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationGreaterThanFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationGreaterThanFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be greater than"), filename, lineNumber)
       {}
     };
@@ -21,7 +21,7 @@ namespace CBUnit
     template <class T> class TestExpectationGreaterThanFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationGreaterThanFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationGreaterThanFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be greater than"), filename, lineNumber)
       {}
     };
@@ -31,7 +31,7 @@ namespace CBUnit
   class ExpectGreaterThan: public virtual ExpectBase<T>
   {
   public:
-    void greaterThan(const T& expected) const
+    void greaterThan(T expected) const
     {
       if (Logic::logic(this->actual() <= expected))
       {
@@ -40,7 +40,7 @@ namespace CBUnit
     }
 
     //aliases
-    void above(const T& expected) {greaterThan(expected);}
-    void gt(const T& expected) const {greaterThan(expected);}
+    void above(T expected) {greaterThan(expected);}
+    void gt(T expected) const {greaterThan(expected);}
   };
 }

@@ -13,7 +13,7 @@ namespace CBUnit
     template <class T> class TestExpectationEqualsFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationEqualsFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationEqualsFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to equal"), filename, lineNumber)
       {}
     };
@@ -21,7 +21,7 @@ namespace CBUnit
     template <class T> class TestExpectationEqualsFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationEqualsFailure(const T& actual, const T& expected, const char* filename, uint32_t lineNumber):
+      TestExpectationEqualsFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to equal"), filename, lineNumber)
       {}
     };
@@ -31,7 +31,7 @@ namespace CBUnit
   class ExpectEquals: public virtual ExpectBase<T>
   {
   public:
-    void equal(const T& expected) const
+    void equal(T expected) const
     {
       if (Logic::logic(this->actual() != expected))
       {

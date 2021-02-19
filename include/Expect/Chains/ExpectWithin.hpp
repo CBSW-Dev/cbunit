@@ -10,7 +10,7 @@ namespace CBUnit
 {
   namespace
   {
-    template <class T> std::string buildWithinMessage(const T& delta)
+    template <class T> std::string buildWithinMessage(T delta)
     {
       std::stringstream ss;
       ss << "to be within ";
@@ -19,7 +19,7 @@ namespace CBUnit
       return ss.str();
     }
 
-    template <class T> std::string buildNotWithinMessage(const T& delta)
+    template <class T> std::string buildNotWithinMessage(T delta)
     {
       return std::string("not ") + buildWithinMessage(delta);
     }
@@ -29,7 +29,7 @@ namespace CBUnit
     template <class T> class TestExpectationWithinFailure<T, ExpectLogic>: public TestError
     {
     public:
-      TestExpectationWithinFailure(const T& actual, const T& expected, const T& delta, const char* filename, uint32_t lineNumber):
+      TestExpectationWithinFailure(T actual, T expected, T delta, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, buildWithinMessage(delta)), filename, lineNumber)
       {}
     };
@@ -37,7 +37,7 @@ namespace CBUnit
     template <class T> class TestExpectationWithinFailure<T, ExpectInvertingLogic>: public TestError
     {
     public:
-      TestExpectationWithinFailure(const T& actual, const T& expected, const T& delta, const char* filename, uint32_t lineNumber):
+      TestExpectationWithinFailure(T actual, T expected, T delta, const char* filename, uint32_t lineNumber):
         TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, buildNotWithinMessage(delta)), filename, lineNumber)
       {}
     };
@@ -47,12 +47,12 @@ namespace CBUnit
   class ExpectWithin: public ExpectBaseMixin<T>
   {
   public:
-    ExpectWithin(const T& delta, const T& actual, const char* filename, uint32_t lineNumber):
+    ExpectWithin(T delta, T actual, const char* filename, uint32_t lineNumber):
       ExpectBaseMixin<T>(actual, filename, lineNumber),
       _delta(delta)
     {}
         
-    void of(const T& expected) const
+    void of(T expected) const
     {
       auto min = expected - _delta;
       auto max = expected + _delta;
@@ -62,6 +62,6 @@ namespace CBUnit
       }
     }
   private:
-    const T& _delta;
+    T _delta;
   };
 }

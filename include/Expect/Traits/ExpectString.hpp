@@ -50,10 +50,7 @@ namespace CBUnit
       not(actual, filename, lineNumber),
       to(actual, filename, lineNumber),
       length(_length, filename, lineNumber)
-    {
-      std::cout << actual << std::endl;
-      std::cout << std::string(actual) << std::endl;
-    }
+    {}
   private:
     std::string::size_type _length;
   public:

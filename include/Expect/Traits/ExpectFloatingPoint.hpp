@@ -11,7 +11,7 @@ namespace CBUnit
   template <typename T, typename Logic> class ExpectToBeFloatingPoint: public ExpectComparable<T, Logic>::Be
   {
   public:
-    ExpectWithin<T,Logic> within(const T& value)
+    ExpectWithin<T,Logic> within(T value)
     {
       return ExpectWithin<T, Logic>(value, this->actual(), this->filename(), this->lineNumber());
     }

@@ -13,7 +13,7 @@ namespace CBUnit
     template <class T> class StringBuilder
     {
     public:
-      static std::string build(const T& value)
+      static std::string build(T value)
       {
         std::stringstream ss;
         ss << value;
@@ -54,7 +54,7 @@ namespace CBUnit
   class TestExpectationMessageBuilder
   {
   public:
-    template <class T> static std::string buildMessage(const T& actual, const T& expected, const std::string& conjunction)
+    template <class T> static std::string buildMessage(T actual, T expected, const std::string& conjunction)
     {
       std::stringstream ss;
       ss << "Expected ";
@@ -65,7 +65,7 @@ namespace CBUnit
       ss << StringBuilder<T>::build(expected);;
       return ss.str();
     }
-    template <class T> static std::string buildMessage(const T& actual, const std::string& suffix)
+    template <class T> static std::string buildMessage(T actual, const std::string& suffix)
     {
       std::stringstream ss;
       ss << "Expected ";
