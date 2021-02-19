@@ -17,9 +17,11 @@ fixture("Simple Fixture", []() {
   group("Second Group", []() {
     scenario("Simple Scenario 2", []() {
       const char* cstring = "Hello";
+      std::string string = "Hello";
 
       
-      expect(cstring).string.to.contain("exl");
+      expect(cstring).string.to.contain("el");
+      expect(string).length.to.equal(5);
     });
   });
 });

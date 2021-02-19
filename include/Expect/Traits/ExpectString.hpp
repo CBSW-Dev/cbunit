@@ -41,4 +41,34 @@ namespace CBUnit
   };
 
   template <typename T, typename Logic> class ExpectTo<T, Logic, typename std::enable_if<ExpectIs<T>::string>::type>: public ExpectToString<Logic> {};
+
+  template <> class ExpectRoot<std::string>
+  {
+  public:
+    ExpectRoot(const std::string& actual, const char* filename, uint32_t lineNumber):
+      _length(actual.length()),
+      not(actual, filename, lineNumber),
+      to(actual, filename, lineNumber),
+      length(_length, filename, lineNumber)
+    {
+      std::cout << actual << std::endl;
+      std::cout << std::string(actual) << std::endl;
+    }
+  private:
+    std::string::size_type _length;
+  public:
+    class Not
+    {
+    public:
+      Not(const std::string& actual, const char* filename, uint32_t lineNumber):
+        to(actual, filename, lineNumber)
+      {}
+
+      ExpectBaseMixin<std::string, ExpectToBase<std::string, ExpectInvertingLogic>> to;
+    };
+
+    Not not;
+    ExpectBaseMixin<std::string, ExpectToBase<std::string, ExpectLogic>> to;
+    ExpectRoot<std::string::size_type> length;
+  };
 }

@@ -17,10 +17,7 @@ namespace CBUnit
       not(actual, filename, lineNumber),
       to(actual, filename, lineNumber),
       string(_string, filename, lineNumber)
-    {
-      std::cout << actual << std::endl;
-      std::cout << std::string(actual) << std::endl;
-    }
+    {}
   private:
     std::string _string;
   public:
@@ -37,6 +34,5 @@ namespace CBUnit
     Not not;
     ExpectBaseMixin<const char*, ExpectToBase<const char*, ExpectLogic>> to;
     ExpectRoot<std::string> string;
-  
   };
 }
