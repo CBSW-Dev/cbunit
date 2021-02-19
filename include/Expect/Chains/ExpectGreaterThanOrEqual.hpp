@@ -14,7 +14,7 @@ namespace CBUnit
     {
     public:
       TestExpectationGreaterThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be greater than or equal"), filename, lineNumber)
+        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be greater than or equal to"), filename, lineNumber)
       {}
     };
 
@@ -22,7 +22,7 @@ namespace CBUnit
     {
     public:
       TestExpectationGreaterThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be greater than or equal"), filename, lineNumber)
+        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be greater than or equal to"), filename, lineNumber)
       {}
     };
 
