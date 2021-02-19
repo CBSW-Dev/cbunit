@@ -35,7 +35,9 @@ CBUNIT_SOURCE_FILES = 	src/Application/main.cpp \
 CBUNIT_EXAMPLES_FILES = examples/unit_boolean.cpp \
 												examples/unit_integer.cpp \
 												examples/unit_floatingPoint.cpp \
-												examples/unit_pointer.cpp
+												examples/unit_pointer.cpp \
+												examples/unit_string.cpp \
+												examples/unit_cstring.cpp
 
 CBUNIT_OBJECT_FILES = $(patsubst $(CBUNIT_SOURCE_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/%.o, $(CBUNIT_SOURCE_FILES))
 CBUNIT_EXAMPLES_OBJECT_FILES = $(patsubst $(CBUNIT_EXAMPLES_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/examples/%.o, $(CBUNIT_EXAMPLES_FILES))

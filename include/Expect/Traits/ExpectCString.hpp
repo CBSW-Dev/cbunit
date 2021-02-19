@@ -13,7 +13,7 @@ namespace CBUnit
   {
   public:
     ExpectRoot(const char* actual, const char* filename, uint32_t lineNumber):
-      _string(actual),
+      _string(actual == nullptr ? "" : actual),
       not(actual, filename, lineNumber),
       to(actual, filename, lineNumber),
       string(_string, filename, lineNumber),
