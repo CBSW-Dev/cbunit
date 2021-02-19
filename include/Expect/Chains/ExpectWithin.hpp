@@ -56,7 +56,7 @@ namespace CBUnit
     {
       auto min = expected - _delta;
       auto max = expected + _delta;
-      if (Logic::logic(this->actual() >= min && this->actual() >= max))
+      if (Logic::logic((this->actual() < min) || (this->actual() > max)))
       {
         throw TestExpectationWithinFailure<T, Logic>(this->actual(), expected, _delta, this->filename(), this->lineNumber());
       }

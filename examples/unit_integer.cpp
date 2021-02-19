@@ -22,14 +22,14 @@ fixture("Integer", []() {
   });
 
    scenario("should have the be.greaterThanOrEqual language chain", []() {
-    uint32_t integer = 17;
+    uint16_t integer = 17;
     expect(integer).to.be.greaterThanOrEqual(12); //pass
     expect(integer).to.be.greaterThanOrEqual(17); //pass
     expect(integer).to.be.greaterThanOrEqual(19); //fail
   });
 
    scenario("should have the be.lessThan language chain", []() {
-    uint32_t integer = 17;
+    int16_t integer = 17;
     expect(integer).to.be.lessThan(19); //pass
     expect(integer).to.be.lessThan(17); //fail
     expect(integer).to.be.lessThan(12); //fail
@@ -50,7 +50,7 @@ fixture("Integer", []() {
   });
 
   scenario("should have the be.at.most language chain", []() {
-    uint32_t integer = 17;
+    uint64_t integer = 17;
     expect(integer).to.be.at.most(19); //pass
     expect(integer).to.be.at.most(17); //pass
     expect(integer).to.be.at.most(12); //fail
