@@ -20,11 +20,6 @@ namespace CBUnit
 		{
 			return Expect<Type>(value,  _file, _line);
 		}
-
-		Expect<std::string> expect(const char* value) const
-		{
-			return Expect<std::string>(value, _file, _line);
-		}
 	private:
 		const char* _file;
 		uint32_t _line;

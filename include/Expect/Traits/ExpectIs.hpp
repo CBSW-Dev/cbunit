@@ -10,5 +10,6 @@ namespace CBUnit
     static constexpr bool integer = std::is_integral<T>::value && !boolean;
     static constexpr bool string = std::is_same<T, std::string>::value;
     static constexpr bool pointer = std::is_pointer<T>::value;
+    static constexpr bool constCharArray = std::is_same<T, const char*>::value;
   };
 }
