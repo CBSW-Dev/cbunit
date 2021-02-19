@@ -30,6 +30,30 @@ namespace CBUnit
       }
     };
 
+    template <class U> class StringBuilder<std::vector<U>>
+    {
+    public:
+      static std::string build(const std::vector<U>& value)
+      {
+        std::string output = std::string("{");
+        bool comma = false;
+        for (auto item : value)
+        {
+          if (comma)
+          {
+            output += ",";
+          }
+          else
+          {
+            comma = true;
+          }
+          output += StringBuilder<U>::build(item);
+        }
+        output += "}";
+        return output;
+      }
+    };
+
     template <> class StringBuilder<bool>
     {
     public:

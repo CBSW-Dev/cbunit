@@ -8,13 +8,13 @@ namespace CBUnit
   namespace
   {
     struct TestExpectationNullText {static constexpr const char* text = "to be null";};
-    template <typename T, class Logic> using TestExpectationNullFailure = TestExpectationFailure<T, Logic, TestExpectationNullText>; 
+    template <typename T, class Logic> using TestExpectationNullFailure = TestExpectationFailure<T, T, Logic, TestExpectationNullText>; 
 
     struct TestExpectationValidText {static constexpr const char* text = "to be valid";};
-    template <typename T, class Logic> using TestExpectationValidFailure = TestExpectationFailure<T, Logic, TestExpectationValidText>; 
+    template <typename T, class Logic> using TestExpectationValidFailure = TestExpectationFailure<T, T, Logic, TestExpectationValidText>; 
 
     struct TestExpectationAddressText {static constexpr const char* text = "to have address";};
-    template <typename T, class Logic> using TestExpectationAddressFailure = TestExpectationFailure<T, Logic, TestExpectationAddressText>; 
+    template <typename T, class Logic> using TestExpectationAddressFailure = TestExpectationFailure<T, T, Logic, TestExpectationAddressText>; 
   }
 
   template <typename T, typename Logic> class ExpectToBePointer: public virtual ExpectBase<T>

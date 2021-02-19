@@ -14,13 +14,13 @@ namespace CBUnit
   namespace
   {
     struct TestExpectationNaNText {static constexpr const char* text = "to be NaN";};
-    template <typename T, class Logic> using TestExpectationNaNFailure = TestExpectationFailure<T, Logic, TestExpectationNaNText>; 
+    template <typename T, class Logic> using TestExpectationNaNFailure = TestExpectationFailure<T, T, Logic, TestExpectationNaNText>; 
 
     struct TestExpectationInfiniteText {static constexpr const char* text = "to be infinite";};
-    template <typename T, class Logic> using TestExpectationInfiniteFailure = TestExpectationFailure<T, Logic, TestExpectationInfiniteText>;
+    template <typename T, class Logic> using TestExpectationInfiniteFailure = TestExpectationFailure<T, T, Logic, TestExpectationInfiniteText>;
 
     struct TestExpectationFiniteText {static constexpr const char* text = "to be finite";};
-    template <typename T, class Logic> using TestExpectationFiniteFailure = TestExpectationFailure<T, Logic, TestExpectationFiniteText>;
+    template <typename T, class Logic> using TestExpectationFiniteFailure = TestExpectationFailure<T, T, Logic, TestExpectationFiniteText>;
   }
 
   template <typename T, typename Logic> using ExpectToFloatingPoint = typename ExpectComparable<T, Logic>::To;

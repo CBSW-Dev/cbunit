@@ -9,10 +9,10 @@ namespace CBUnit
   namespace
   {
     struct TestExpectationLessThanOrEqualText {static constexpr const char* text = "to be less than or equal to";};
-    template <typename T, class Logic> using TestExpectationLessThanOrEqualFailure = TestExpectationFailure<T, Logic, TestExpectationLessThanOrEqualText>; 
+    template <typename T, class Logic> using TestExpectationLessThanOrEqualFailure = TestExpectationFailure<T, T, Logic, TestExpectationLessThanOrEqualText>; 
 
     struct TestExpectationAtMostText {static constexpr const char* text = "to be at most";};
-    template <typename T, class Logic> using TestExpectationAtMostFailure = TestExpectationFailure<T, Logic, TestExpectationAtMostText>; 
+    template <typename T, class Logic> using TestExpectationAtMostFailure = TestExpectationFailure<T, T, Logic, TestExpectationAtMostText>; 
   }
 
   template <class T, class Logic = ExpectLogic>

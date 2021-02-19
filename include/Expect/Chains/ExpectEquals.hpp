@@ -9,7 +9,7 @@ namespace CBUnit
   namespace
   {
     struct TestExpectationEqualsText {static constexpr const char* text = "to equal";};
-    template <typename T, class Logic> using TestExpectationEqualsFailure = TestExpectationFailure<T, Logic, TestExpectationEqualsText>; 
+    template <typename T, class Logic> using TestExpectationEqualsFailure = TestExpectationFailure<T, T, Logic, TestExpectationEqualsText>; 
   }
 
   template <class T, class Logic = ExpectLogic>

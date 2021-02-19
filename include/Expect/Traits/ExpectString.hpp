@@ -10,7 +10,7 @@ namespace CBUnit
   namespace
   {
     struct TestExpectationContainText {static constexpr const char* text = "to contain";};
-    template <class Logic> using TestExpectationContainFailure = TestExpectationFailure<std::string, Logic, TestExpectationContainText>; 
+    template <class Logic> using TestExpectationContainFailure = TestExpectationFailure<std::string, std::string, Logic, TestExpectationContainText>; 
   }
 
   template <typename Logic> class ExpectToString: public ExpectEquals<std::string, Logic>

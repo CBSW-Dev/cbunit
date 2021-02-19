@@ -5,3 +5,4 @@
 #include "ExpectString.hpp"
 #include "ExpectCString.hpp"
 #include "ExpectPointer.hpp"
+#include "ExpectSequence.hpp"

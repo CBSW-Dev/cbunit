@@ -18,11 +18,11 @@ namespace CBUnit
       ss << " of";
       return ss.str();
     }
-    template <class T, class Logic> class TestExpectationWithinFailure: public TestExpectationFailure<T, Logic>
+    template <class T, class Logic> class TestExpectationWithinFailure: public TestExpectationFailure<T, T, Logic>
     {
     public:
       TestExpectationWithinFailure(T actual, T expected, T delta, const char* filename, uint32_t lineNumber):
-        TestExpectationFailure<T, Logic>(actual, expected, buildWithinMessage(delta), filename, lineNumber)
+        TestExpectationFailure<T, T, Logic>(actual, expected, buildWithinMessage(delta), filename, lineNumber)
       {}
     };
   }

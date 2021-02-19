@@ -36,6 +36,7 @@ CBUNIT_EXAMPLES_FILES = examples/unit_boolean.cpp \
 												examples/unit_pointer.cpp \
 												examples/unit_string.cpp \
 												examples/unit_cstring.cpp \
+												examples/unit_sequence.cpp \
 												examples/unit_size.cpp
 
 CBUNIT_OBJECT_FILES = $(patsubst $(CBUNIT_SOURCE_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/%.o, $(CBUNIT_SOURCE_FILES))
