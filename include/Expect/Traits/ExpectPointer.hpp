@@ -7,59 +7,14 @@ namespace CBUnit
 {
   namespace
   {
-    template <typename T, class Logic> class TestExpectationNullFailure {};
-  
-    template <typename T> class TestExpectationNullFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationNullFailure(T actual, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, "to be null"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationNullText {static constexpr const char* text = "to be null";};
+    template <typename T, class Logic> using TestExpectationNullFailure = TestExpectationFailure<T, Logic, TestExpectationNullText>; 
 
-    template <typename T> class TestExpectationNullFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationNullFailure(T actual, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, "not to be null"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationValidText {static constexpr const char* text = "to be valid";};
+    template <typename T, class Logic> using TestExpectationValidFailure = TestExpectationFailure<T, Logic, TestExpectationValidText>; 
 
-    template <typename T, class Logic> class TestExpectationValidFailure {};
-  
-    template <typename T> class TestExpectationValidFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationValidFailure(T actual, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, "to be valid"), filename, lineNumber)
-      {}
-    };
-
-    template <typename T> class TestExpectationValidFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationValidFailure(T actual, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, "not to be valid"), filename, lineNumber)
-      {}
-    };
-
-    template <typename T, class Logic> class TestExpectationAddressFailure {};
-  
-    template <typename T> class TestExpectationAddressFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationAddressFailure(T actual, T address, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, address, "to have address"), filename, lineNumber)
-      {}
-    };
-
-    template <typename T> class TestExpectationAddressFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationAddressFailure(T actual, T address, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, address, "not to have address"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationAddressText {static constexpr const char* text = "to have address";};
+    template <typename T, class Logic> using TestExpectationAddressFailure = TestExpectationFailure<T, Logic, TestExpectationAddressText>; 
   }
 
   template <typename T, typename Logic> class ExpectToBePointer: public virtual ExpectBase<T>

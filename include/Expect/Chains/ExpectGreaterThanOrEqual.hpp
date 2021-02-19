@@ -1,48 +1,18 @@
 #pragma once
 #include "ExpectBase.hpp"
 #include "ExpectLogic.hpp"
-#include "TestExpectationMessageBuilder.hpp"
+#include "Expect/Error/TestExpectationFailure.hpp"
 #include "TestStructure/TestError.hpp"
 
 namespace CBUnit
 {
   namespace
   {
-    template <class T, class Logic> class TestExpectationGreaterThanOrEqualFailure {};
-  
-    template <class T> class TestExpectationGreaterThanOrEqualFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationGreaterThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be greater than or equal to"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationGreaterThanOrEqualText {static constexpr const char* text = "to be greater than or equal to";};
+    template <typename T, class Logic> using TestExpectationGreaterThanOrEqualFailure = TestExpectationFailure<T, Logic, TestExpectationGreaterThanOrEqualText>; 
 
-    template <class T> class TestExpectationGreaterThanOrEqualFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationGreaterThanOrEqualFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be greater than or equal to"), filename, lineNumber)
-      {}
-    };
-
-    template <class T, class Logic> class TestExpectationAtLeastFailure {};
-  
-    template <class T> class TestExpectationAtLeastFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationAtLeastFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be at least"), filename, lineNumber)
-      {}
-    };
-
-    template <class T> class TestExpectationAtLeastFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationAtLeastFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be at least"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationAtLeastText {static constexpr const char* text = "to be at least";};
+    template <typename T, class Logic> using TestExpectationAtLeastFailure = TestExpectationFailure<T, Logic, TestExpectationAtLeastText>; 
   }
 
   template <class T, class Logic = ExpectLogic>

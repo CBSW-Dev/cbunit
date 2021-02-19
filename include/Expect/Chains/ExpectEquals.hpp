@@ -1,30 +1,15 @@
 #pragma once
 #include "ExpectBase.hpp"
 #include "ExpectLogic.hpp"
-#include "TestExpectationMessageBuilder.hpp"
+#include "Expect/Error/TestExpectationFailure.hpp"
 #include "TestStructure/TestError.hpp"
 
 namespace CBUnit
 {
   namespace
   {
-    template <class T, class Logic> class TestExpectationEqualsFailure {};
-  
-    template <class T> class TestExpectationEqualsFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationEqualsFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to equal"), filename, lineNumber)
-      {}
-    };
-
-    template <class T> class TestExpectationEqualsFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationEqualsFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to equal"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationEqualsText {static constexpr const char* text = "to equal";};
+    template <typename T, class Logic> using TestExpectationEqualsFailure = TestExpectationFailure<T, Logic, TestExpectationEqualsText>; 
   }
 
   template <class T, class Logic = ExpectLogic>

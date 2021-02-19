@@ -62,4 +62,25 @@ fixture("Floating Point", []() {
     expect(floatingPoint).to.be.within(0.1).of(17.1); //pass
     expect(floatingPoint).to.be.within(0.04).of(17.1); //fail
   });
+
+  scenario("should have the be.NaN language chain", []() {
+    double notANumber = std::numeric_limits<double>::quiet_NaN();
+    float number = 1.5f;
+    expect(notANumber).to.be.NaN();//pass
+    expect(number).to.be.NaN();//fail
+  });
+
+  scenario("should have the be.infinite language chain", []() {
+    double infiniteNumber = std::numeric_limits<double>::infinity();
+    float finiteNumber = 1.5f;
+    expect(infiniteNumber).to.be.infinite();//pass
+    expect(finiteNumber).to.be.infinite();//fail
+  });
+
+  scenario("should have the be.finite language chain", []() {
+    double infiniteNumber = std::numeric_limits<double>::infinity();
+    float finiteNumber = 1.5f;
+    expect(finiteNumber).to.be.finite();//pass
+    expect(infiniteNumber).to.be.finite();//fail
+  });
 });

@@ -9,23 +9,8 @@ namespace CBUnit
 {
   namespace
   {
-    template <class Logic> class TestExpectationContainFailure {};
-  
-    template <> class TestExpectationContainFailure<ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationContainFailure(const std::string& actual, const std::string& expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to contain"), filename, lineNumber)
-      {}
-    };
-
-    template <> class TestExpectationContainFailure<ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationContainFailure(const std::string& actual, const std::string& expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to contain"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationContainText {static constexpr const char* text = "to contain";};
+    template <class Logic> using TestExpectationContainFailure = TestExpectationFailure<std::string, Logic, TestExpectationContainText>; 
   }
 
   template <typename Logic> class ExpectToString: public ExpectEquals<std::string, Logic>

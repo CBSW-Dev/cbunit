@@ -1,30 +1,16 @@
 #pragma once
 #include "ExpectBase.hpp"
 #include "ExpectLogic.hpp"
-#include "TestExpectationMessageBuilder.hpp"
+#include "Expect/Error/TestExpectationFailure.hpp"
 #include "TestStructure/TestError.hpp"
 
 namespace CBUnit
 {
   namespace
   {
-    template <class T, class Logic> class TestExpectationLessThanFailure {};
-  
-    template <class T> class TestExpectationLessThanFailure<T, ExpectLogic>: public TestError
-    {
-    public:
-      TestExpectationLessThanFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "to be less than"), filename, lineNumber)
-      {}
-    };
+    struct TestExpectationLessThanText {static constexpr const char* text = "to be less than";};
+    template <typename T, class Logic> using TestExpectationLessThanFailure = TestExpectationFailure<T, Logic, TestExpectationLessThanText>; 
 
-    template <class T> class TestExpectationLessThanFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationLessThanFailure(T actual, T expected, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, "not to be less than"), filename, lineNumber)
-      {}
-    };
   }
 
   template <class T, class Logic = ExpectLogic>

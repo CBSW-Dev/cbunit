@@ -1,7 +1,7 @@
 #pragma once
 #include "ExpectBase.hpp"
 #include "ExpectLogic.hpp"
-#include "TestExpectationMessageBuilder.hpp"
+#include "Expect/Error/TestExpectationFailure.hpp"
 #include "TestStructure/TestError.hpp"
 
 #include <sstream>
@@ -18,27 +18,11 @@ namespace CBUnit
       ss << " of";
       return ss.str();
     }
-
-    template <class T> std::string buildNotWithinMessage(T delta)
-    {
-      return std::string("not ") + buildWithinMessage(delta);
-    }
-
-    template <class T, class Logic> class TestExpectationWithinFailure {};
-  
-    template <class T> class TestExpectationWithinFailure<T, ExpectLogic>: public TestError
+    template <class T, class Logic> class TestExpectationWithinFailure: public TestExpectationFailure<T, Logic>
     {
     public:
       TestExpectationWithinFailure(T actual, T expected, T delta, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, buildWithinMessage(delta)), filename, lineNumber)
-      {}
-    };
-
-    template <class T> class TestExpectationWithinFailure<T, ExpectInvertingLogic>: public TestError
-    {
-    public:
-      TestExpectationWithinFailure(T actual, T expected, T delta, const char* filename, uint32_t lineNumber):
-        TestError(TestExpectationMessageBuilder::buildMessage(actual, expected, buildNotWithinMessage(delta)), filename, lineNumber)
+        TestExpectationFailure<T, Logic>(actual, expected, buildWithinMessage(delta), filename, lineNumber)
       {}
     };
   }
