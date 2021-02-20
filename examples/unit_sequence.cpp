@@ -2,12 +2,28 @@
 #include "cbunit_macros.hpp"
 
 fixture("Sequence", []() {
-  scenario("should have the equals language chain", []() {
+  scenario("should have the equals language chain (vector)", []() {
     std::vector<int> vector = {1, 2, 3, 4};
     std::vector<int> same = {1, 2, 3, 4};
     std::vector<int> different = {10, 1, 8, 2};
     expect(vector).to.equal(same); //pass
     expect(vector).to.equal(different); //fail
+  });
+
+  scenario("should have the equals language chain (list)", []() {
+    std::list<int> list = {1, 2, 3, 4};
+    std::list<int> same = {1, 2, 3, 4};
+    std::list<int> different = {10, 1, 8, 2};
+    expect(list).to.equal(same); //pass
+    expect(list).to.equal(different); //fail
+  });
+
+  scenario("should have the equals language chain (deque)", []() {
+    std::deque<int> deque = {1, 2, 3, 4};
+    std::deque<int> same = {1, 2, 3, 4};
+    std::deque<int> different = {10, 1, 8, 2};
+    expect(deque).to.equal(same); //pass
+    expect(deque).to.equal(different); //fail
   });
 
   scenario("should have the not equals language chain", []() {

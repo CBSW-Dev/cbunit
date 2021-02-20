@@ -16,7 +16,8 @@ namespace CBUnit
       static std::string build(T value)
       {
         std::stringstream ss;
-        ss << value;
+        ss 
+        << value;
         return ss.str();
       }
     };
@@ -30,10 +31,10 @@ namespace CBUnit
       }
     };
 
-    template <class U> class StringBuilder<std::vector<U>>
+    template <class T> class SequenceStringBuilder
     {
     public:
-      static std::string build(const std::vector<U>& value)
+      static std::string build(const T& value)
       {
         std::string output = std::string("{");
         bool comma = false;
@@ -47,12 +48,17 @@ namespace CBUnit
           {
             comma = true;
           }
-          output += StringBuilder<U>::build(item);
+          output += StringBuilder<typename T::value_type>::build(item);
         }
         output += "}";
         return output;
       }
     };
+
+    template <class U> class StringBuilder<std::vector<U>>: public SequenceStringBuilder<std::vector<U>> {};
+    template <class U> class StringBuilder<std::list<U>>: public SequenceStringBuilder<std::list<U>> {};
+    template <class U> class StringBuilder<std::deque<U>>: public SequenceStringBuilder<std::deque<U>> {};
+    template <class U, std::size_t N> class StringBuilder<std::array<U, N>>: public SequenceStringBuilder<std::array<U, N>> {};
 
     template <> class StringBuilder<bool>
     {
