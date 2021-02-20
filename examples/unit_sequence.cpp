@@ -39,4 +39,10 @@ fixture("Sequence", []() {
     expect(vector).to.contain(3); //pass
     expect(vector).to.contain(5); //fail
   });
+
+  scenario("should have the length language chain", []() {
+    std::vector<int> vector = {1, 2, 3, 4};
+    expect(vector).length.to.equal(4); //pass
+    expect(vector).length.to.equal(5); //fail
+  });
 });

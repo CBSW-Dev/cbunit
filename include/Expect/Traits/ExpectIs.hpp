@@ -21,7 +21,22 @@ namespace CBUnit
     static constexpr bool value = true;
   };
 
+  template<class U> struct ExpectIsSequence<std::vector<U>>
+  {
+    static constexpr bool value = true;
+  };
+
+  template<class U> struct ExpectIsSequence<const std::list<U>&>
+  {
+    static constexpr bool value = true;
+  };
+
   template<class U> struct ExpectIsSequence<std::list<U>>
+  {
+    static constexpr bool value = true;
+  };
+
+  template<class U> struct ExpectIsSequence<const std::deque<U>&>
   {
     static constexpr bool value = true;
   };

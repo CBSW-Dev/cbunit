@@ -9,7 +9,7 @@
 
 namespace CBUnit
 {
-  template <typename T> class ExpectRoot
+  template <typename T, typename Enabler = void> class ExpectRoot
   {
   public:
     using Type = typename std::conditional<std::is_scalar<T>::value, T, const T&>::type;

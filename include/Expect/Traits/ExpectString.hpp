@@ -34,6 +34,7 @@ namespace CBUnit
       _length(actual.length()),
       not(actual, filename, lineNumber),
       to(actual, filename, lineNumber),
+      size(sizeof(actual), filename, lineNumber),
       length(_length, filename, lineNumber)
     {}
   private:
@@ -51,6 +52,7 @@ namespace CBUnit
 
     Not not;
     ExpectBaseMixin<std::string, ExpectToBase<std::string, ExpectLogic>> to;
+    ExpectSize size;
     ExpectRoot<std::string::size_type> length;
   };
 }

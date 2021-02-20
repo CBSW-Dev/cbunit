@@ -29,5 +29,35 @@ namespace CBUnit
     }
   };
   
+  template <typename T> class ExpectRoot<T, typename std::enable_if<ExpectIs<T>::sequence>::type>
+  {
+  public:
+    using Type = const T&;
+    ExpectRoot(Type actual, const char* filename, uint32_t lineNumber):
+      _length(actual.size()),
+      not(actual, filename, lineNumber),
+      to(actual, filename, lineNumber),
+      size(sizeof(actual), filename, lineNumber),
+      length(_length, filename, lineNumber)
+    {}
+  private:
+    typename T::size_type _length;
+  public:
+    class Not
+    {
+    public:
+      Not(Type actual, const char* filename, uint32_t lineNumber):
+        to(actual, filename, lineNumber)
+      {}
+
+      ExpectBaseMixin<Type, ExpectToBase<Type, ExpectInvertingLogic>> to;
+    };
+
+    Not not;
+    ExpectBaseMixin<Type, ExpectToBase<Type, ExpectLogic>> to;
+    ExpectSize size;
+    ExpectRoot<typename T::size_type> length;
+  };
+
   template <typename T, typename Logic> class ExpectTo<T, Logic, typename std::enable_if<ExpectIs<T>::sequence>::type>: public ExpectToSequence<T, Logic> {};
 }
