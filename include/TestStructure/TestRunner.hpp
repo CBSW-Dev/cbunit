@@ -32,8 +32,6 @@ namespace CBUnit
     using HeapFixture = HeapObject<Fixture>;
     using FixtureList = std::list<HeapFixture>;
     FixtureList _fixtures;
-
-    Fixture* _currentFixture = nullptr;
     TestMonitor _testMonitor;
     TestReporter* _reporter;
     TestStatistics _statistics;

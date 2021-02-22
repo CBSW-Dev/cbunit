@@ -1,63 +1,34 @@
-CBUNIT_SOURCE_DIRECTORY := src
-CBUNIT_INCLUDE_DIRECTORY := include
-CBUNIT_BUILD_DIRECTORY := build
-CBUNIT_EXAMPLES_DIRECTORY := examples
+default: help
 
-CBUNIT_SOURCE_FILES = 	src/Application/main.cpp \
-												src/Application/CommandLineArguments.cpp \
-												src/Application/Settings.cpp \
-												src/TestStructure/TestObject.cpp \
-												src/TestStructure/Scenario.cpp \
-												src/TestStructure/Group.cpp \
-												src/TestStructure/Fixture.cpp \
-												src/TestStructure/TestRunner.cpp \
-												src/TestStructure/TestMonitor.cpp \
-												src/TestStructure/TestError.cpp \
-												src/TestStructure/TestStructureError.cpp \
-												src/TestStructure/TestStatistics.cpp \
-												src/TestStructure/LineInfo.cpp \
-												src/TestStructure/FileInfo.cpp \
-												src/Reporters/TestReporter.cpp \
-												src/Reporters/FinalisingTestReporter.cpp \
-												src/Reporters/MinTestReporter.cpp \
-												src/Reporters/DotTestReporter.cpp \
-												src/Reporters/SpecTestReporter.cpp \
-												src/Reporters/TestReporterFactory.cpp \
-												src/OutputStreams/OutputStream.cpp \
-												src/OutputStreams/StdCoutOutputStream.cpp \
-												src/OutputStreams/ANSI8OutputStream.cpp \
-												src/OutputStreams/ANSI16OutputStream.cpp \
-												src/OutputStreams/ANSI256OutputStream.cpp \
-												src/OutputStreams/OutputStreamFactory.cpp
+include make/c++.mk
+include make/tools.mk
+include make/sources.mk
+include src/make.mk
+include examples/make.mk
 
-CBUNIT_EXAMPLES_FILES = examples/unit_boolean.cpp \
-												examples/unit_integer.cpp \
-												examples/unit_floatingPoint.cpp \
-												examples/unit_pointer.cpp \
-												examples/unit_string.cpp \
-												examples/unit_cstring.cpp \
-												examples/unit_sequence.cpp \
-												examples/unit_size.cpp
+CBUNIT_LIBRARY = 							$(CBUNIT_BINARY_DIRECTORY)/cbunit.lib
+CBUNIT_EXAMPLES_EXECUTABLE =	$(CBUNIT_BINARY_DIRECTORY)/cbunit-examples
 
-CBUNIT_OBJECT_FILES = $(patsubst $(CBUNIT_SOURCE_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/%.o, $(CBUNIT_SOURCE_FILES))
-CBUNIT_EXAMPLES_OBJECT_FILES = $(patsubst $(CBUNIT_EXAMPLES_DIRECTORY)/%.cpp, $(CBUNIT_BUILD_DIRECTORY)/examples/%.o, $(CBUNIT_EXAMPLES_FILES))
+CPP_INCLUDES += $(CBUNIT_INCLUDE_DIRECTORY)
 
-cbunit: $(CBUNIT_OBJECT_FILES)
-	ar rcs cbunit.lib $^
+cbunit: $(CBUNIT_LIBRARY)
+
+$(CBUNIT_LIBRARY): $(CBUNIT_OBJECT_FILES)
+	$(MAKE_LIBRARY) $(CBUNIT_LIBRARY) $^
 
 cbunit-clean:
-	rm -rf $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) cbunit-examples cbunit.lib
+	$(REMOVE) $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) $(CBUNIT_EXAMPLES_EXECUTABLE) $(CBUNIT_LIBRARY)
 
-cbunit-examples: $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) examples/main.cpp
-	mkdir -p $(@D)
-	g++ -std=c++11 -fno-operator-names -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+cbunit-examples: $(CBUNIT_EXAMPLES_EXECUTABLE)
+	$(CBUNIT_EXAMPLES_EXECUTABLE) --reporter spec --output ansi256
 
-$(CBUNIT_BUILD_DIRECTORY)/%.o: $(CBUNIT_SOURCE_DIRECTORY)/%.cpp
-	mkdir -p $(@D)
-	g++ -std=c++11 -fno-operator-names -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+$(CBUNIT_EXAMPLES_EXECUTABLE): $(CBUNIT_OBJECT_FILES) $(CBUNIT_EXAMPLES_OBJECT_FILES) examples/main.cpp
+	$(MAKE_DIRECTORY) $(@D)
+	$(REMOVE) $@
+	$(CPP) -o $@ $^
 
-$(CBUNIT_BUILD_DIRECTORY)/examples/%.o: $(CBUNIT_EXAMPLES_DIRECTORY)/%.cpp
-	mkdir -p $(@D)
-	g++ -std=c++11 -fno-operator-names -c -o $@ $^ -I$(CBUNIT_INCLUDE_DIRECTORY)
+$(CBUNIT_BUILD_DIRECTORY)/%.o: %.cpp
+	$(MAKE_DIRECTORY) $(@D)
+	$(CPP) -c -o $@ $^ 
 
 .PHONY: cbunit-clean
