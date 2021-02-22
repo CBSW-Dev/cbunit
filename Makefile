@@ -1,4 +1,4 @@
-default: help
+default: cbunit
 
 include make/c++.mk
 include make/tools.mk
