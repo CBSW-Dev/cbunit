@@ -16,8 +16,7 @@ namespace CBUnit
       static std::string build(T value)
       {
         std::stringstream ss;
-        ss 
-        << value;
+        ss << value;
         return ss.str();
       }
     };
@@ -56,8 +55,11 @@ namespace CBUnit
     };
 
     template <class U> class StringBuilder<std::vector<U>>: public SequenceStringBuilder<std::vector<U>> {};
+    template <class U> class StringBuilder<const std::vector<U>&>: public SequenceStringBuilder<std::vector<U>> {};
     template <class U> class StringBuilder<std::list<U>>: public SequenceStringBuilder<std::list<U>> {};
+    template <class U> class StringBuilder<const std::list<U>&>: public SequenceStringBuilder<std::list<U>> {};
     template <class U> class StringBuilder<std::deque<U>>: public SequenceStringBuilder<std::deque<U>> {};
+    template <class U> class StringBuilder<const std::deque<U>&>: public SequenceStringBuilder<std::deque<U>> {};
     template <class U, std::size_t N> class StringBuilder<std::array<U, N>>: public SequenceStringBuilder<std::array<U, N>> {};
 
     template <> class StringBuilder<bool>
@@ -95,6 +97,7 @@ namespace CBUnit
       ss << StringBuilder<U>::build(expected);;
       return ss.str();
     }
+    
     template <class T> static std::string buildMessage(T actual, const std::string& suffix)
     {
       std::stringstream ss;

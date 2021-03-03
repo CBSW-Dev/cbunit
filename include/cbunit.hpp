@@ -5,3 +5,4 @@
 #include "TestStructure/FileInfo.hpp"
 #include "TestStructure/LineInfo.hpp"
 #include "Expect/Expect.hpp"
+#include "Expect/Error/TestExpectationObjectFailure.hpp"
