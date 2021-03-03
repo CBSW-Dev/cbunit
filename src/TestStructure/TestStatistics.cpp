@@ -5,6 +5,7 @@ namespace CBUnit
   void TestStatistics::begin()
   {
     _passes = 0;
+    _skips = 0;
     _failures.clear();
     _startTime = std::chrono::steady_clock::now();
   }
