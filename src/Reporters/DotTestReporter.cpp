@@ -1,5 +1,7 @@
 #include "Reporters/DotTestReporter.hpp"
 
+#include "Utility/Unused.hpp"
+
 namespace CBUnit
 {
   DotTestReporter::DotTestReporter(OutputStream& ostream):
@@ -11,28 +13,46 @@ namespace CBUnit
      _ostream << "\r\n";
   }
 
-  void DotTestReporter::beginFixture(Fixture& fixture) {}
+  void DotTestReporter::beginFixture(Fixture& fixture) 
+  {
+    ::CBUnit::unused(fixture);
+  }
 
-  void DotTestReporter::endFixture(Fixture& fixture) {}
+  void DotTestReporter::endFixture(Fixture& fixture) 
+  {
+    ::CBUnit::unused(fixture);
+  }
 
-  void DotTestReporter::beginGroup(Group& group) {}
+  void DotTestReporter::beginGroup(Group& group) 
+  {
+    ::CBUnit::unused(group);
+  }
 
-  void DotTestReporter::endGroup(Group& group) {}
+  void DotTestReporter::endGroup(Group& group) 
+  {
+    ::CBUnit::unused(group);
+  }
 
-  void DotTestReporter::beginScenario(Scenario& scenario) {}
+  void DotTestReporter::beginScenario(Scenario& scenario) 
+  {
+    ::CBUnit::unused(scenario);
+  }
   
   void DotTestReporter::passScenario(Scenario& scenario) 
   {
+     ::CBUnit::unused(scenario);
     _ostream << _ostream.green << "."  << _ostream.reset;
   }
 
   void DotTestReporter::skipScenario(Scenario& scenario) 
   {
+     ::CBUnit::unused(scenario);
     _ostream << _ostream.darkGrey << "."  << _ostream.reset;
   }
 
   void DotTestReporter::failScenario(Scenario& scenario, const TestError& error) 
   {
+     ::CBUnit::unused(scenario, error);
     _ostream << _ostream.red << "."  << _ostream.reset;
   }
 

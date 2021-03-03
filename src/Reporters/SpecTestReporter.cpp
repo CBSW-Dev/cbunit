@@ -1,4 +1,5 @@
 #include "Reporters/SpecTestReporter.hpp"
+#include "Utility/Unused.hpp"
 
 namespace CBUnit
 {
@@ -16,7 +17,10 @@ namespace CBUnit
     _ostream << _ostream.white << fixture.name() << _ostream.reset << "\r\n";
   }
 
-  void SpecTestReporter::endFixture(Fixture& fixture) {}
+  void SpecTestReporter::endFixture(Fixture& fixture) 
+  {
+     ::CBUnit::unused(fixture);
+  }
 
   void SpecTestReporter::beginGroup(Group& group) 
   {
@@ -27,11 +31,13 @@ namespace CBUnit
 
   void SpecTestReporter::endGroup(Group& group) 
   {
+     ::CBUnit::unused(group);
     --_depth;
   }
 
   void SpecTestReporter::beginScenario(Scenario& scenario) 
   {
+    ::CBUnit::unused(scenario);
     ++_depth;
   }
   
@@ -51,6 +57,7 @@ namespace CBUnit
 
   void SpecTestReporter::failScenario(Scenario& scenario, const TestError& error) 
   {
+    ::CBUnit::unused(error);
     printTabs();
     _ostream << _ostream.red << _failureCount++ << ") " << scenario.name() << _ostream.reset << "\r\n";
     --_depth;

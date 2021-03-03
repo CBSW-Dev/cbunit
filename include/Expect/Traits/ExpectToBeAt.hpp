@@ -1,6 +1,8 @@
 #pragma once
 #include "Expect/Chains/ExpectLogic.hpp"
 
+#include "Utility/Unused.hpp"
+
 namespace CBUnit
 {
   //default ExpectToBeAt has nothing
@@ -9,7 +11,10 @@ namespace CBUnit
   template <typename T, typename Logic> class ExpectToBeAtBase: public ExpectToBeAt<T, Logic> 
   {
   public:
-    ExpectToBeAtBase(T actual, const char* filename, uint32_t lineNumber) {}
+    ExpectToBeAtBase(T actual, const char* filename, uint32_t lineNumber) 
+    {
+      ::CBUnit::unused(actual, filename, lineNumber);
+    }
   };
 }
 
