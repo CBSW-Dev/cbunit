@@ -19,6 +19,7 @@ namespace CBUnit
         bThrow = true;
         errorCheck(error);
       }
+      catch(...) {}
       
       if (Logic::logic(bThrow == false))
       {

@@ -5,4 +5,5 @@ CBUNIT_EXAMPLES_FILES += examples/unit_boolean.cpp \
 												examples/unit_string.cpp \
 												examples/unit_cstring.cpp \
 												examples/unit_sequence.cpp \
-												examples/unit_size.cpp
+												examples/unit_size.cpp \
+												examples/unit_throw.cpp
