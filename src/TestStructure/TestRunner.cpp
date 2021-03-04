@@ -18,7 +18,7 @@ namespace CBUnit
   
   void TestRunner::addFixture(Fixture* fixture)
   {
-     TestMonitor::Object object = _testMonitor.currentObject();
+    TestMonitor::Object object = _testMonitor.currentObject();
     switch (object.type)
     {
     case TestMonitor::ObjectType::Fixture:
