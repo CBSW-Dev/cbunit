@@ -1,20 +1,20 @@
 #pragma once
 
 #include "Common.hpp"
-#include "TestObject.hpp"
+#include "TestObjectContainer.hpp"
 #include "HeapObject.hpp"
 #include "Scenario.hpp"
 
 namespace CBUnit
 {
-  class Group: public TestObject
+  class Group: public TestObjectContainer
   {
     friend class GroupDeclaration;
     friend class TestRunner;
   private:
     Group(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber);
 
-    void run();
+    void run() override;
   private:
     using HeapScenario = HeapObject<Scenario>;
     using ScenarioList = std::list<HeapScenario>;

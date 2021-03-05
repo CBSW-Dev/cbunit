@@ -11,7 +11,7 @@ namespace CBUnit
 
   void Scenario::run()
   {
-    _function();
+    TestRunner::instance().runScenario(this, _function);
   }
 
   ScenarioDeclaration::ScenarioDeclaration(const char* name, RunFunction function)

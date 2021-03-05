@@ -43,7 +43,7 @@ namespace CBUnit
     {
     case TestMonitor::ObjectType::Fixture:
     case TestMonitor::ObjectType::Group:
-      runGroup(group);
+      static_cast<TestObjectContainer*>(object.object)->addObject(group);
       break;
     case TestMonitor::ObjectType::None:
       _deferredTestStructureError = TestStructureError("Group cannot be added to the global scope", group->filename(), group->lineNumber());
@@ -61,13 +61,50 @@ namespace CBUnit
     {
     case TestMonitor::ObjectType::Fixture:
     case TestMonitor::ObjectType::Group:
-      runScenario(scenario);
+      static_cast<TestObjectContainer*>(object.object)->addObject(scenario);
       break;
     case TestMonitor::ObjectType::None:
       _deferredTestStructureError = TestStructureError("Scenario cannot be added to the global scope", scenario->filename(), scenario->lineNumber());
       break;
     case TestMonitor::ObjectType::Scenario:
       throw TestStructureError("Scenario cannot be added within another scenario", scenario->filename(), scenario->lineNumber());
+      break;
+
+    }
+  }
+
+  void TestRunner::addBeforeEach(BeforeEach* beforeEach)
+  {
+    TestMonitor::Object object = _testMonitor.currentObject();
+    switch (object.type)
+    {
+    case TestMonitor::ObjectType::Fixture:
+    case TestMonitor::ObjectType::Group:
+      static_cast<TestObjectContainer*>(object.object)->setBeforeEach(beforeEach);
+      break;
+    case TestMonitor::ObjectType::None:
+      _deferredTestStructureError = TestStructureError("Before Each cannot be added to the global scope", beforeEach->filename(), beforeEach->lineNumber());
+      break;
+    case TestMonitor::ObjectType::Scenario:
+      throw TestStructureError("Before Each cannot be added to a scenario", beforeEach->filename(), beforeEach->lineNumber());
+      break;
+    }
+  }
+
+  void TestRunner::addAfterEach(AfterEach* afterEach)
+  {
+    TestMonitor::Object object = _testMonitor.currentObject();
+    switch (object.type)
+    {
+    case TestMonitor::ObjectType::Fixture:
+    case TestMonitor::ObjectType::Group:
+      static_cast<TestObjectContainer*>(object.object)->setAfterEach(afterEach);
+      break;
+    case TestMonitor::ObjectType::None:
+      _deferredTestStructureError = TestStructureError("After Each cannot be added to the global scope", afterEach->filename(), afterEach->lineNumber());
+      break;
+    case TestMonitor::ObjectType::Scenario:
+      throw TestStructureError("After Each cannot be added to a scenario", afterEach->filename(), afterEach->lineNumber());
       break;
     }
   }
@@ -115,21 +152,21 @@ namespace CBUnit
     _testMonitor.beginFixture(*fixture);
     _reporter->beginFixture(*fixture);
     fixture->run();
+
     _reporter->endFixture(*fixture);
     _testMonitor.endFixture();
   }
 
-  void TestRunner::runGroup(Group* group)
+  void TestRunner::runGroup(Group* group, RunFunction function)
   {
     _testMonitor.beginGroup(*group);
     _reporter->beginGroup(*group);
-    group->run();
+    function();
     _reporter->endGroup(*group);
     _testMonitor.endGroup();
-    delete group;
   }
 
-  void TestRunner::runScenario(Scenario* scenario)
+  void TestRunner::runScenario(Scenario* scenario, RunFunction function)
   {
     _testMonitor.beginScenario(*scenario);
     _reporter->beginScenario(*scenario);
@@ -144,7 +181,7 @@ namespace CBUnit
       bool testPass = true;
       try
       {
-        scenario->run();
+        function();
       }
       catch (const TestError& error)
       {
@@ -160,6 +197,5 @@ namespace CBUnit
     }
     
     _testMonitor.endScenario();
-    delete scenario;
   }
 }

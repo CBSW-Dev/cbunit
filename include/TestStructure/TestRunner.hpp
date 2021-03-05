@@ -4,6 +4,8 @@
 #include "Fixture.hpp"
 #include "Group.hpp"
 #include "Scenario.hpp"
+#include "BeforeEach.hpp"
+#include "AfterEach.hpp"
 #include "TestMonitor.hpp"
 #include "Reporters/TestReporter.hpp"
 #include "TestStructureError.hpp"
@@ -12,12 +14,17 @@ namespace CBUnit
 {
   class TestRunner
   {
+    friend class Fixture;
+    friend class Group;
+    friend class Scenario;
   public:
     TestRunner();
     void setReporter(TestReporter& reporter);
     void addFixture(Fixture* fixture);
     void addGroup(Group* group);
     void addScenario(Scenario* scenario);
+    void addBeforeEach(BeforeEach* beforeEach);
+    void addAfterEach(AfterEach* afterEach);
 
     int run();
 
@@ -26,8 +33,8 @@ namespace CBUnit
     void begin();
     void end();
     void runFixture(Fixture* fixture);
-    void runGroup(Group* group);
-    void runScenario(Scenario* scenario);
+    void runGroup(Group* group, RunFunction function);
+    void runScenario(Scenario* scenario, RunFunction function);
   private:
     using HeapFixture = HeapObject<Fixture>;
     using FixtureList = std::list<HeapFixture>;

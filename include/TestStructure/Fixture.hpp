@@ -1,21 +1,22 @@
 #pragma once
 
 #include "Common.hpp"
-#include "TestObject.hpp"
+#include "TestObjectContainer.hpp"
 #include "HeapObject.hpp"
 #include "Group.hpp"
 #include "Scenario.hpp"
+#include "BeforeEach.hpp"
 
 namespace CBUnit
 {
-  class Fixture: public TestObject
+  class Fixture: public TestObjectContainer
   {
     friend class FixtureDeclaration;
     friend class TestRunner;
   private:
     Fixture(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber);
 
-    void run();
+    void run() override;
   private:
     using HeapGroup = HeapObject<Group>;
     using GroupList = std::list<HeapGroup>;
