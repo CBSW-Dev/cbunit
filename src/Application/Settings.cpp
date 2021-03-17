@@ -1,5 +1,8 @@
 #include "Application/Settings.hpp"
 #include "Application/InvalidArgumentValueError.hpp"
+
+#include <algorithm>
+ 
 namespace CBUnit
 {
   namespace

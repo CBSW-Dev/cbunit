@@ -4,7 +4,7 @@ CPP_WARNINGS = -Wall -Werror -Wextra
 
 CPP_INCLUDES =
 
-CPP_OPTIONS = -fpermissive
+CPP_OPTIONS = 
 #disable the not, and, or, etc keywords
 CPP_OPTIONS += -fno-operator-names
 
