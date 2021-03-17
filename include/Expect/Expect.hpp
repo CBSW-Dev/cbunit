@@ -1,6 +1,10 @@
 #pragma once
+
 #include "Traits/ExpectTraits.hpp"
 #include "Traits/ExpectRoot.hpp"
+
+#include "Traits/ExpectRootTraits.hpp"
+
 #include <string>
 
 namespace CBUnit
