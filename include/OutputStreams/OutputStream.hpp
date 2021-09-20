@@ -1,7 +1,6 @@
 #pragma once
 
 #include "TestStructure/Fixture.hpp"
-#include "TestStructure/Group.hpp"
 #include "TestStructure/Scenario.hpp"
 
 namespace CBUnit

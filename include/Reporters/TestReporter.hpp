@@ -1,7 +1,6 @@
 #pragma once
 
 #include "TestStructure/Fixture.hpp"
-#include "TestStructure/Group.hpp"
 #include "TestStructure/Scenario.hpp"
 #include "TestStructure/TestStatistics.hpp"
 #include "TestStructure/TestError.hpp"
@@ -15,8 +14,6 @@ namespace CBUnit
     virtual void begin() = 0;
     virtual void beginFixture(Fixture& fixture) = 0;
     virtual void endFixture(Fixture& fixture) = 0;
-    virtual void beginGroup(Group& group) =0 ;
-    virtual void endGroup(Group& group) = 0;
     virtual void beginScenario(Scenario& scenario) = 0;
     virtual void passScenario(Scenario& scenario) = 0;
     virtual void skipScenario(Scenario& scenario) = 0;

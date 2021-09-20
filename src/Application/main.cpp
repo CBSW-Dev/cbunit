@@ -2,7 +2,6 @@
 #include "Application/CommandLineArguments.hpp"
 #include "Application/InvalidArgumentError.hpp"
 #include "Application/InvalidArgumentValueError.hpp"
-#include "TestStructure/TestStructureError.hpp"
 #include "OutputStreams/OutputStreamFactory.hpp"
 #include "Reporters/TestReporterFactory.hpp"
 #include <iostream>
@@ -28,10 +27,6 @@ int main(int argc, char** argv)
   catch (const ::CBUnit::InvalidArgumentValueError& error)
   {
     std::cout << "Argument " << error.argument << " has invalid value " << error.value << std::endl;
-  }
-  catch (const ::CBUnit::TestStructureError& error)
-  {
-    std::cout << error.message() << "\r\n  at " << error.filename() << ":" << error.lineNumber() << std::endl;
   }
   delete reporter;
   delete output;

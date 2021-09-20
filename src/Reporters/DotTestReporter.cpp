@@ -23,16 +23,6 @@ namespace CBUnit
     ::CBUnit::unused(fixture);
   }
 
-  void DotTestReporter::beginGroup(Group& group) 
-  {
-    ::CBUnit::unused(group);
-  }
-
-  void DotTestReporter::endGroup(Group& group) 
-  {
-    ::CBUnit::unused(group);
-  }
-
   void DotTestReporter::beginScenario(Scenario& scenario) 
   {
     ::CBUnit::unused(scenario);

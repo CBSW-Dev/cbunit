@@ -1,43 +1,44 @@
 #include "TestStructure/Fixture.hpp"
 #include "TestStructure/TestRunner.hpp"
-#include "TestStructure/FileInfo.hpp"
-#include "TestStructure/LineInfo.hpp"
-
 namespace CBUnit
 {
-  Fixture::Fixture(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber):
-    TestObjectContainer(name, attributes, function, filename, lineNumber)
-  {}
+  Fixture::Fixture(const char* name, ScenarioList& scenarios, BeforeEach* beforeEach, AfterEach* afterEach, const char* filename, uint32_t lineNumber):
+    TestObject(name, {}, filename, lineNumber),
+    _scenarios(&scenarios),
+    _beforeEach(beforeEach),
+    _afterEach(afterEach)
+  {
+    TestRunner::instance().addFixture(this);
+  }
+
+  Fixture::Fixture(const char* name, std::initializer_list<TestAttributes> attributes, ScenarioList& scenarios, BeforeEach* beforeEach, AfterEach* afterEach, const char* filename, uint32_t lineNumber):
+    TestObject(name, attributes, filename, lineNumber),
+    _scenarios(&scenarios),
+    _beforeEach(beforeEach),
+    _afterEach(afterEach)
+  {
+    TestRunner::instance().addFixture(this);
+  }
 
   void Fixture::run()
   {
-    _function();
-
-    for (auto object: _objects)
+    for (auto scenario: *_scenarios)
     {
       if (_beforeEach)
       {
         _beforeEach->run();
       }
-      object->run();
+      scenario->run();
       if (_afterEach)
       {
         _afterEach->run();
       }
-      delete object;
     }
-    delete _beforeEach;
-    delete _afterEach;
-
   }
 
-  FixtureDeclaration::FixtureDeclaration(const char* name, RunFunction function)
+  Fixture::ScenarioList& Fixture::scenarios()
   {
-    TestRunner::instance().addFixture(new Fixture(name, {}, function, FileInfo::file, LineInfo::line));
+    return *_scenarios;
   }
 
-  FixtureDeclaration::FixtureDeclaration(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function)
-  {
-    TestRunner::instance().addFixture(new Fixture(name, attributes, function, FileInfo::file, LineInfo::line));
-  }
 }

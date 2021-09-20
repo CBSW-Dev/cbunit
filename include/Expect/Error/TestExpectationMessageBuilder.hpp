@@ -3,6 +3,7 @@
 #pragma once
 #include "TestStructure/TestError.hpp"
 
+#include <vector>
 #include <sstream>
 #include <iomanip>
 

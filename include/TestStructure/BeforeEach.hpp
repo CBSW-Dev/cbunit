@@ -10,14 +10,10 @@ namespace CBUnit
     friend class BeforeEachDeclaration;
     friend class TestRunner;
   public:
+    BeforeEach(RunFunction function, const char* filename, uint32_t lineNumber);
+
     void run() override;
   private:
-    BeforeEach(RunFunction function, const char* filename, uint32_t lineNumber);
-  };
-
-  class BeforeEachDeclaration
-  {
-  public:
-    BeforeEachDeclaration(RunFunction function);
+    RunFunction _function;
   };
 }

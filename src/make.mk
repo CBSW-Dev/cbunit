@@ -3,19 +3,13 @@ CBUNIT_SOURCE_FILES += 	$(CBUNIT_SOURCE_DIRECTORY)/Application/main.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/Application/CommandLineArguments.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/Application/Settings.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestObject.cpp \
-												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestObjectContainer.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/Scenario.cpp \
-												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/Group.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/Fixture.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/BeforeEach.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/AfterEach.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestRunner.cpp \
-												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestMonitor.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestError.cpp \
-												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestStructureError.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/TestStatistics.cpp \
-												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/LineInfo.cpp \
-												$(CBUNIT_SOURCE_DIRECTORY)/TestStructure/FileInfo.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/Reporters/TestReporter.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/Reporters/FinalisingTestReporter.cpp \
 												$(CBUNIT_SOURCE_DIRECTORY)/Reporters/MinTestReporter.cpp \

@@ -10,14 +10,9 @@ namespace CBUnit
     friend class AfterEachDeclaration;
     friend class TestRunner;
   public:
+    AfterEach(RunFunction function, const char* filename, uint32_t lineNumber);
     void run() override;
   private:
-    AfterEach(RunFunction function, const char* filename, uint32_t lineNumber);
-  };
-
-  class AfterEachDeclaration
-  {
-  public:
-   AfterEachDeclaration(RunFunction function);
+    RunFunction _function;
   };
 }

@@ -34,7 +34,7 @@ namespace CBUnit
 
     void infinite()
     {
-      if (Logic::logic(!isinf(this->actual())))
+      if (Logic::logic(!std::isinf(this->actual())))
       {
         throw TestExpectationInfiniteFailure<T, Logic>(this->actual(), this->filename(), this->lineNumber());
       }
@@ -42,7 +42,7 @@ namespace CBUnit
 
     void finite()
     {
-      if (Logic::logic(isinf(this->actual())))
+      if (Logic::logic(std::isinf(this->actual())))
       {
         throw TestExpectationFiniteFailure<T, Logic>(this->actual(), this->filename(), this->lineNumber());
       }
@@ -50,7 +50,7 @@ namespace CBUnit
 
     void NaN()
     {
-      if (Logic::logic(!isnan(this->actual())))
+      if (Logic::logic(!std::isnan(this->actual())))
       {
         throw TestExpectationNaNFailure<T, Logic>(this->actual(), this->filename(), this->lineNumber());
       }

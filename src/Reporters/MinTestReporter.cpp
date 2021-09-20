@@ -20,16 +20,6 @@ namespace CBUnit
     ::CBUnit::unused(fixture);
   }
 
-  void MinTestReporter::beginGroup(Group& group) 
-  {
-    ::CBUnit::unused(group);
-  }
-
-  void MinTestReporter::endGroup(Group& group) 
-  {
-    ::CBUnit::unused(group);
-  }
-
   void MinTestReporter::beginScenario(Scenario& scenario) 
   {
     ::CBUnit::unused(scenario);

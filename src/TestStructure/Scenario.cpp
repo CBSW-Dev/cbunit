@@ -1,26 +1,31 @@
 #include "TestStructure/Scenario.hpp"
 #include "TestStructure/TestRunner.hpp"
-#include "TestStructure/FileInfo.hpp"
-#include "TestStructure/LineInfo.hpp"
 
 namespace CBUnit
 {
-  Scenario::Scenario(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber):
-    TestObject(name, attributes, function, filename, lineNumber)
-  {}
+  Scenario::Scenario(Fixture& fixture, const char* name, RunFunction function, const char* filename, uint32_t lineNumber):
+    TestObject(name, {}, filename, lineNumber),
+    _function(function)
+  {
+    fixture.scenarios().push_back(this);
+  }
+
+  Scenario::Scenario(Fixture& fixture, const char* name, TestAttributes attributes, RunFunction function, const char* filename, uint32_t lineNumber):
+    TestObject(name, {attributes}, filename, lineNumber),
+    _function(function)
+  {
+    fixture.scenarios().push_back(this);
+  }
+
+  Scenario::Scenario(Fixture& fixture, const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function, const char* filename, uint32_t lineNumber):
+    TestObject(name, attributes, filename, lineNumber),
+    _function(function)
+  {
+    fixture.scenarios().push_back(this);
+  }
 
   void Scenario::run()
   {
     TestRunner::instance().runScenario(this, _function);
-  }
-
-  ScenarioDeclaration::ScenarioDeclaration(const char* name, RunFunction function)
-  {
-    TestRunner::instance().addScenario(new Scenario(name, {}, function, FileInfo::file, LineInfo::line));
-  }
-
-  ScenarioDeclaration::ScenarioDeclaration(const char* name, std::initializer_list<TestAttributes> attributes, RunFunction function)
-  {
-    TestRunner::instance().addScenario(new Scenario(name, attributes, function, FileInfo::file, LineInfo::line));
   }
 }

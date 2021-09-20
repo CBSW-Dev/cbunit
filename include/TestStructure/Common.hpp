@@ -10,7 +10,7 @@
 
 namespace CBUnit
 {
-  using RunFunction = std::function<void()>;
+  using RunFunction = void (*)();
 }
 
 #define CBUNIT_CONCAT2(x, y) x ## y

@@ -1,5 +1,4 @@
-CBUNIT_EXAMPLES_FILES += examples/unit_structure.cpp \
-												examples/unit_boolean.cpp \
+CBUNIT_EXAMPLES_FILES += examples/unit_boolean.cpp \
 												examples/unit_integer.cpp \
 												examples/unit_floatingPoint.cpp \
 												examples/unit_pointer.cpp \
