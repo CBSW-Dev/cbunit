@@ -16,4 +16,11 @@ namespace CBUnit
   private:
     RunFunction _function;
   };
+
+
+  class BeforeEachDeclaration
+  {
+  public:
+    BeforeEachDeclaration(BeforeEach* src);
+  };
 }

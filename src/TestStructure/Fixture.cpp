@@ -1,28 +1,30 @@
 #include "TestStructure/Fixture.hpp"
 #include "TestStructure/TestRunner.hpp"
+#include <iostream>
+
 namespace CBUnit
 {
-  Fixture::Fixture(const char* name, ScenarioList& scenarios, BeforeEach* beforeEach, AfterEach* afterEach, const char* filename, uint32_t lineNumber):
+  Fixture* Fixture::instance = nullptr;
+
+  Fixture::Fixture(const char* name, const char* filename, uint32_t lineNumber):
     TestObject(name, {}, filename, lineNumber),
-    _scenarios(&scenarios),
-    _beforeEach(beforeEach),
-    _afterEach(afterEach)
+    _beforeEach(nullptr),
+    _afterEach(nullptr)
   {
     TestRunner::instance().addFixture(this);
   }
 
-  Fixture::Fixture(const char* name, std::initializer_list<TestAttributes> attributes, ScenarioList& scenarios, BeforeEach* beforeEach, AfterEach* afterEach, const char* filename, uint32_t lineNumber):
+  Fixture::Fixture(const char* name, std::initializer_list<TestAttributes> attributes, const char* filename, uint32_t lineNumber):
     TestObject(name, attributes, filename, lineNumber),
-    _scenarios(&scenarios),
-    _beforeEach(beforeEach),
-    _afterEach(afterEach)
+    _beforeEach(nullptr),
+    _afterEach(nullptr)
   {
     TestRunner::instance().addFixture(this);
   }
 
   void Fixture::run()
   {
-    for (auto scenario: *_scenarios)
+    for (auto scenario: _scenarios)
     {
       if (_beforeEach)
       {
@@ -38,7 +40,13 @@ namespace CBUnit
 
   Fixture::ScenarioList& Fixture::scenarios()
   {
-    return *_scenarios;
+    return _scenarios;
+  }
+
+
+  FixtureDeclaration::FixtureDeclaration(Fixture* src)
+  {
+    Fixture::instance = src;
   }
 
 }

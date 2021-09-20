@@ -15,4 +15,10 @@ namespace CBUnit
   private:
     RunFunction _function;
   };
+
+  class AfterEachDeclaration
+  {
+  public:
+    AfterEachDeclaration(AfterEach* src);
+  };
 }

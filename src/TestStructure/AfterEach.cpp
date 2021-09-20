@@ -1,5 +1,6 @@
 #include "TestStructure/AfterEach.hpp"
 #include "TestStructure/TestRunner.hpp"
+#include "TestStructure/Fixture.hpp"
 
 namespace CBUnit
 {
@@ -11,5 +12,10 @@ namespace CBUnit
   void AfterEach::run()
   {
     _function();
+  }
+
+  AfterEachDeclaration::AfterEachDeclaration(AfterEach* src)
+  {
+    Fixture::instance->_afterEach = src;
   }
 }

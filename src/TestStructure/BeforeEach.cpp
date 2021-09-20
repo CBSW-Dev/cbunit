@@ -1,5 +1,6 @@
 #include "TestStructure/BeforeEach.hpp"
 #include "TestStructure/TestRunner.hpp"
+#include "TestStructure/Fixture.hpp"
 
 namespace CBUnit
 {
@@ -11,5 +12,11 @@ namespace CBUnit
   void BeforeEach::run()
   {
     _function();
+  }
+
+
+  BeforeEachDeclaration::BeforeEachDeclaration(BeforeEach* src)
+  {
+    Fixture::instance->_beforeEach = src;
   }
 }
