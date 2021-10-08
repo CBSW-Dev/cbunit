@@ -25,7 +25,7 @@ namespace CBUnit
     }
   };
 
-  template <typename T, typename Logic> class ExpectTo<T, Logic, typename std::enable_if<ExpectIs<T>::string>::type>: public ExpectToString<Logic> {};
+  template <typename T, typename Logic> class ExpectTo<T, Logic, typename ExpectEnableIfString<T>::type>: public ExpectToString<Logic> {};
 
   template <> class ExpectRoot<std::string>
   {

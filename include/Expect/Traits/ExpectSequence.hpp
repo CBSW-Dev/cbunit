@@ -29,7 +29,7 @@ namespace CBUnit
     }
   };
   
-  template <typename T> class ExpectRoot<T, typename std::enable_if<ExpectIs<T>::sequence>::type>
+  template <typename T> class ExpectRoot<T, typename ExpectEnableIfSequence<T>::type>
   {
   public:
     using Type = const T&;
@@ -59,5 +59,5 @@ namespace CBUnit
     ExpectRoot<typename T::size_type> length;
   };
 
-  template <typename T, typename Logic> class ExpectTo<T, Logic, typename std::enable_if<ExpectIs<T>::sequence>::type>: public ExpectToSequence<T, Logic> {};
+  template <typename T, typename Logic> class ExpectTo<T, Logic, typename ExpectEnableIfSequence<T>::type>: public ExpectToSequence<T, Logic> {};
 }

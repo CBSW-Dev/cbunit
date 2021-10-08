@@ -58,7 +58,7 @@ namespace CBUnit
   };
   template <typename T, typename Logic> using ExpectToBeAtFloatingPoint = typename ExpectComparable<T, Logic>::At;
 
-  template <typename T, typename Logic> class ExpectTo<T, Logic, typename std::enable_if<std::is_floating_point<T>::value>::type>: public ExpectToFloatingPoint<T, Logic> {};
-  template <typename T, typename Logic> class ExpectToBe<T, Logic, typename std::enable_if<std::is_floating_point<T>::value>::type>: public ExpectToBeFloatingPoint<T, Logic> {};
-  template <typename T, typename Logic> class ExpectToBeAt<T, Logic, typename std::enable_if<std::is_floating_point<T>::value>::type>: public ExpectToBeAtFloatingPoint<T, Logic> {};
+  template <typename T, typename Logic> class ExpectTo<T, Logic, typename ExpectEnableIfFloatingPoint<T>::type>: public ExpectToFloatingPoint<T, Logic> {};
+  template <typename T, typename Logic> class ExpectToBe<T, Logic, typename ExpectEnableIfFloatingPoint<T>::type>: public ExpectToBeFloatingPoint<T, Logic> {};
+  template <typename T, typename Logic> class ExpectToBeAt<T, Logic, typename ExpectEnableIfFloatingPoint<T>::type>: public ExpectToBeAtFloatingPoint<T, Logic> {};
 }

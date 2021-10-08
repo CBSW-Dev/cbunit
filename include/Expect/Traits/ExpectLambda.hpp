@@ -28,5 +28,5 @@ namespace CBUnit
     }
   };
 
-  template <typename T, typename Logic> class ExpectTo<T, Logic, typename std::enable_if<ExpectIs<T>::voidFunction>::type>: public ExpectToLambda<T, Logic> {};
+  template <typename T, typename Logic> class ExpectTo<T, Logic, typename ExpectEnableIfVoidFunction<T>::type>: public ExpectToLambda<T, Logic> {};
 }

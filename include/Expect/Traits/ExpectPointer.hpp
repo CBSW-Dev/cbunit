@@ -49,6 +49,6 @@ namespace CBUnit
     }
   };
 
-  template <typename T, typename Logic> class ExpectToBe<T, Logic, typename std::enable_if<ExpectIs<T>::pointer>::type>: public ExpectToBePointer<T, Logic> {};
-  template <typename T, typename Logic> class ExpectToHave<T, Logic, typename std::enable_if<ExpectIs<T>::pointer>::type>: public ExpectToHavePointer<T, Logic> {};
+  template <typename T, typename Logic> class ExpectToBe<T, Logic, typename ExpectEnableIfPointer<T>::type>: public ExpectToBePointer<T, Logic> {};
+  template <typename T, typename Logic> class ExpectToHave<T, Logic, typename ExpectEnableIfPointer<T>::type>: public ExpectToHavePointer<T, Logic> {};
 }

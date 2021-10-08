@@ -18,7 +18,7 @@ namespace CBUnit
       to(actual, filename, lineNumber),
       size(sizeof(actual), filename, lineNumber)
     {}
-     
+
     class Not
     {
     public:
