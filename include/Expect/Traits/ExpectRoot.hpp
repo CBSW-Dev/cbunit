@@ -26,11 +26,11 @@ namespace CBUnit
         to(actual, filename, lineNumber)
       {}
 
-      ExpectBaseMixin<Type, ExpectToBase<Type, ExpectInvertingLogic>> to;
+      ExpectBaseMixin<T, ExpectToBase<T, ExpectInvertingLogic>> to;
     };
 
     Not not;
-    ExpectBaseMixin<Type, ExpectToBase<Type, ExpectLogic>> to;
+    ExpectBaseMixin<T, ExpectToBase<T, ExpectLogic>> to;
     ExpectSize size;
   };
 }

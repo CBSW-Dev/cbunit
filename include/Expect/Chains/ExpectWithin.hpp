@@ -21,7 +21,7 @@ namespace CBUnit
     template <class T, class Logic> class TestExpectationWithinFailure: public TestExpectationFailure<T, T, Logic>
     {
     public:
-      TestExpectationWithinFailure(T actual, T expected, T delta, const char* filename, uint32_t lineNumber):
+      TestExpectationWithinFailure(typename ExpectBase<T>::Type actual, typename ExpectBase<T>::Type expected, typename ExpectBase<T>::Type delta, const char* filename, uint32_t lineNumber):
         TestExpectationFailure<T, T, Logic>(actual, expected, buildWithinMessage(delta), filename, lineNumber)
       {}
     };
@@ -31,12 +31,12 @@ namespace CBUnit
   class ExpectWithin: public ExpectBaseMixin<T>
   {
   public:
-    ExpectWithin(T delta, T actual, const char* filename, uint32_t lineNumber):
+    ExpectWithin(typename ExpectBase<T>::Type delta, typename ExpectBase<T>::Type actual, const char* filename, uint32_t lineNumber):
       ExpectBaseMixin<T>(actual, filename, lineNumber),
       _delta(delta)
     {}
-        
-    void of(T expected) const
+
+    void of(typename ExpectBase<T>::Type expected) const
     {
       auto min = expected - _delta;
       auto max = expected + _delta;
@@ -46,6 +46,6 @@ namespace CBUnit
       }
     }
   private:
-    T _delta;
+    typename ExpectBase<T>::Type _delta;
   };
 }

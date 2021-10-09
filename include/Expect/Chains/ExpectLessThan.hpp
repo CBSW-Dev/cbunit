@@ -17,7 +17,7 @@ namespace CBUnit
   class ExpectLessThan: public virtual ExpectBase<T>
   {
   public:
-    void lessThan(T expected) const
+    void lessThan(typename ExpectBase<T>::Type expected) const
     {
       if (Logic::logic(this->actual() >= expected))
       {
@@ -26,7 +26,7 @@ namespace CBUnit
     }
 
     //aliases
-    void below(T expected) {lessThan(expected);}
-    void lt(T expected) const {lessThan(expected);}
+    void below(typename ExpectBase<T>::Type expected) {lessThan(expected);}
+    void lt(typename ExpectBase<T>::Type expected) const {lessThan(expected);}
   };
 }

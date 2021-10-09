@@ -11,7 +11,7 @@ namespace CBUnit
   template <typename T, typename Logic> class ExpectToBeAtBase: public ExpectToBeAt<T, Logic> 
   {
   public:
-    ExpectToBeAtBase(T actual, const char* filename, uint32_t lineNumber) 
+    ExpectToBeAtBase(typename ExpectBase<T>::Type actual, const char* filename, uint32_t lineNumber) 
     {
       ::CBUnit::unused(actual, filename, lineNumber);
     }

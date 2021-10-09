@@ -7,9 +7,9 @@ namespace CBUnit
   template <typename T>
   class ExpectBase
   {
-  protected:
+  public:
     using Type = typename std::conditional<std::is_scalar<T>::value, T, const T&>::type;
-
+  protected:
     virtual Type actual() const = 0;
     virtual const char* filename() const = 0;
     virtual uint32_t lineNumber() const = 0;
@@ -49,7 +49,7 @@ namespace CBUnit
       return _lineNumber;
     }
   private:
-    T _actual;
+    typename ExpectBase<T>::Type _actual;
     const char* _filename;
     uint32_t _lineNumber;
   };

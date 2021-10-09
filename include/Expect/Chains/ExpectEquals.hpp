@@ -16,7 +16,7 @@ namespace CBUnit
   class ExpectEquals: public virtual ExpectBase<T>
   {
   public:
-    void equal(T expected) const
+    void equal(typename ExpectBase<T>::Type expected) const
     {
       if (Logic::logic(this->actual() != expected))
       {

@@ -19,7 +19,7 @@ namespace CBUnit
   class ExpectLessThanOrEqual: public virtual ExpectBase<T>
   {
   public:
-    void lessThanOrEqual(T expected) const
+    void lessThanOrEqual(typename ExpectBase<T>::Type expected) const
     {
       if (Logic::logic(this->actual() < expected))
       {
@@ -28,14 +28,14 @@ namespace CBUnit
     }
 
     //aliases
-    void lte(T expected) const {lessThanOrEqual(expected);}
+    void lte(typename ExpectBase<T>::Type expected) const {lessThanOrEqual(expected);}
   };
 
   template <class T, class Logic = ExpectLogic>
   class ExpectAtMost: public virtual ExpectBase<T>
   {
   public:
-    void most(T expected) const
+    void most(typename ExpectBase<T>::Type expected) const
     {
       if (Logic::logic(this->actual() < expected))
       {

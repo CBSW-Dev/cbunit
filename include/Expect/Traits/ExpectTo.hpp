@@ -12,7 +12,7 @@ namespace CBUnit
   template <typename T, typename Logic> class ExpectToBase: public ExpectTo<T, Logic>
   {
   public:
-    ExpectToBase(T actual, const char* filename, uint32_t lineNumber):
+    ExpectToBase(typename ExpectBase<T>::Type actual, const char* filename, uint32_t lineNumber):
       be(actual, filename, lineNumber),
       have(actual, filename, lineNumber)
     {}

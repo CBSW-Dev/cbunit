@@ -10,7 +10,7 @@ namespace CBUnit
   template <typename T, typename Logic> class ExpectToBeBase: public ExpectToBe<T, Logic>
   {
   public:
-    ExpectToBeBase(T actual, const char* filename, uint32_t lineNumber):
+    ExpectToBeBase(typename ExpectBase<T>::Type actual, const char* filename, uint32_t lineNumber):
       at(actual, filename, lineNumber)
     {}
     
