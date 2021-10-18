@@ -43,10 +43,8 @@ namespace CBUnit
     return _scenarios;
   }
 
-
   FixtureDeclaration::FixtureDeclaration(Fixture* src)
   {
     Fixture::instance = src;
   }
-
 }

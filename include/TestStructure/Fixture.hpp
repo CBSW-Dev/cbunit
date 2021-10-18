@@ -8,8 +8,6 @@
 
 namespace CBUnit
 {
-  
-
   class Fixture: public TestObject
   {
     friend class FixtureDeclaration;

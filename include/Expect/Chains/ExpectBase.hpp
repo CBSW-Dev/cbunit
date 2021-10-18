@@ -39,6 +39,7 @@ namespace CBUnit
     {
       return _actual;
     }
+    
     const char* filename() const override
     {
       return _filename;
